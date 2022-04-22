@@ -22,13 +22,11 @@ class Jwt:
             str
         """
         now = datetime.datetime.utcnow()
-
         claims["iat"] = now
 
         if exp is not None:
             claims["exp"] = now + datetime.timedelta(seconds=exp)
-
-        return jwt.encode(claims, key, algorithm).decode("utf-8")
+        return jwt.encode(claims, key, algorithm)
 
     @staticmethod
     def verify(token, key, algorithm="HS256"):

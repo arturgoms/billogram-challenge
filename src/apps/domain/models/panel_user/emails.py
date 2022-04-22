@@ -6,21 +6,21 @@ from commons.mail import send_mail
 
 def send_user_invite_email(user, password):
     """
-    Send user invite email.
+    Send panel_user invite email.
 
     Args:
-        user (domain.User, required): Invited user.
-        password (str, required): Invited user's password.
+        user (domain.User, required): Invited panel_user.
+        password (str, required): Invited panel_user's password.
     """
     subject = _("Panel Access")
 
     send_mail(
         subject=subject,
-        template="email/user/invite.html",
+        template="email/panel_user/invite.html",
         to=user.email,
         context={
             "subject": subject,
-            "user": user,
+            "panel_user": user,
             "password": password,
             "primary_button": {
                 "text": _("Access My Account"),
@@ -32,21 +32,21 @@ def send_user_invite_email(user, password):
 
 def send_new_password_email(user, password):
     """
-    Send user new password email.
+    Send panel_user new password email.
 
     Args:
-        user (domain.User, required): Invited user.
-        password (str, required): Invited user's password.
+        user (domain.User, required): Invited panel_user.
+        password (str, required): Invited panel_user's password.
     """
     subject = _("Panel Access")
 
     send_mail(
         subject=subject,
-        template="email/user/new_password.html",
+        template="email/panel_user/new_password.html",
         to=user.email,
         context={
             "subject": subject,
-            "user": user,
+            "panel_user": user,
             "password": password,
             "primary_button": {
                 "text": _("Access My Account"),

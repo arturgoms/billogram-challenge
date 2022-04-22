@@ -29,7 +29,7 @@ def resolve_registered_groups(request, site):
 
             perms = model_admin.get_model_perms(request)
 
-            # Check whether user has any perm for this module.
+            # Check whether panel_user has any perm for this module.
             # If so, add the module to the model_list.
             if not any(perms.values()):
                 continue

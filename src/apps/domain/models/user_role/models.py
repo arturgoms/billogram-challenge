@@ -6,8 +6,8 @@ from commons.models.base import Model
 
 class UserRole(Model):
     user = models.ForeignKey(
-        "domain.User",
-        verbose_name=_("User"),
+        "domain.PanelUser",
+        verbose_name=_("PanelUser"),
         related_name="user_roles",
         on_delete=models.CASCADE,
     )

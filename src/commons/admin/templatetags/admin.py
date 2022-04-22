@@ -72,7 +72,7 @@ def do_changelist_widget(context, widget):
 @register.simple_tag(name="get_user_links", takes_context=True)
 def do_get_user_links(context):
     """
-    Return all user links.
+    Return all panel_user links.
     """
     links = []
 

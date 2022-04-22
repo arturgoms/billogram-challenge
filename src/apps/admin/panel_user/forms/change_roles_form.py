@@ -7,7 +7,7 @@ from commons.admin.permissions.helper import permission_helper
 from commons.forms.mixins import ContextFormMixin
 
 
-class UserInviteAdminForm(ContextFormMixin, forms.ModelForm):
+class ChangeRolesAdminForm(ContextFormMixin, forms.ModelForm):
     roles = forms.MultipleChoiceField(
         label=_("Roles"),
         widget=widgets.FilteredSelectMultiple(
@@ -20,5 +20,5 @@ class UserInviteAdminForm(ContextFormMixin, forms.ModelForm):
         self.fields["roles"].choices = permission_helper.get_all_permissions()
 
     class Meta:
-        model = models.User
-        fields = ["name", "email", "roles"]
+        model = models.PanelUser
+        fields = ["roles"]

@@ -133,7 +133,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # The model to use to represent a User.
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-user-model
 
-AUTH_USER_MODEL = "domain.User"
+AUTH_USER_MODEL = "domain.PanelUser"
 
 # Superuser Settings
 
@@ -224,7 +224,7 @@ CORS_ALLOW_METHODS = config(
 CORS_ALLOW_HEADERS = config(
     "CORS_ALLOW_HEADERS",
     "accept,accept-encoding,accept-timezone,authorization,content-type,dnt,origin,"
-    "user-agent,x-csrftoken,x-requested-with",
+    "panel_user-agent,x-csrftoken,x-requested-with",
     cast=decouple.Csv(),
 )
 
@@ -243,7 +243,7 @@ ADMIN_SITE_URL = None  # Remove site URL
 ADMIN_SHORTCUTS = [
     {
         "title": _("Users"),
-        "url": reverse_lazy("admin:domain_user_changelist"),
+        "url": reverse_lazy("admin:domain_paneluser_changelist"),
         "icon": {"name": "users"},
     }
 ]

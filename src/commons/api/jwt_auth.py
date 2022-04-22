@@ -7,7 +7,7 @@ from commons.api import auth
 class JwtAuthenticationClient(auth.BaseAuthenticationClient):
     def _authenticate_token(self, token):  # noqa
         """
-        Authenticate user using the provided token.
+        Authenticate panel_user using the provided token.
 
         Args:
             token: (string, required) - User token to be validated.
@@ -17,7 +17,7 @@ class JwtAuthenticationClient(auth.BaseAuthenticationClient):
     def authenticate(self, request):
         """
         Perform bearer authentication validation and
-        returns the authenticated user if valid.
+        returns the authenticated panel_user if valid.
         """
         try:
             scheme, token = get_authorization_header(request).decode("utf-8").split()
@@ -30,11 +30,11 @@ class JwtAuthenticationClient(auth.BaseAuthenticationClient):
             return None
 
         if not (claims := self._authenticate_token(token)):
-            # deny if there is no user claims.
+            # deny if there is no panel_user claims.
             return None
 
-        # build authenticated user object.
+        # build authenticated panel_user object.
         user = auth.AuthenticatedUser(pk=claims.get("id"), role=claims.get("role"))
 
-        # returns the authenticated user.
+        # returns the authenticated panel_user.
         return user, token

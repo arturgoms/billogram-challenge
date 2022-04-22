@@ -4,7 +4,7 @@ from rest_framework.permissions import BasePermission
 class IsAuthenticated(BasePermission):
     def has_permission(self, request, view):
         """
-        Grant permission either the user is authenticated
+        Grant permission either the panel_user is authenticated
         or it is a OPTIONS or HEAD http verb.
 
         Returns:
