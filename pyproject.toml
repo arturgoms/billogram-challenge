@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "django-base"
+name = "discount-service"
 version = "0.1.0"
 description = ""
 authors = ["Artur Gomes <contato@arturgomes.com.br>"]

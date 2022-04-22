@@ -3,20 +3,20 @@ kind: Deployment
 metadata:
   name: django-app-deployment
   labels:
-    app: django-base
+    app: discount-service
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: django-base
+      app: discount-service
   template:
     metadata:
       labels:
-        app: django-base
+        app: discount-service
     spec:
       containers:
-      - name: django-base
-        image: ghcr.io/arturgoms/django-base:1.0.5
+      - name: discount-service
+        image: ghcr.io/arturgoms/discount-service:1.0.0
         imagePullPolicy: Always
         envFrom:
           - configMapRef:
@@ -43,7 +43,7 @@ metadata:
 spec:
   type: NodePort
   selector:
-    app: django-base
+    app: discount-service
   ports:
     - protocol: TCP
       port: 80

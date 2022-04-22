@@ -37,7 +37,7 @@ spec:
               value: postgres
 
             - name: POSTGRES_DB
-              value: base
+              value: discount-service
           ports:
             - containerPort: 5432
           volumeMounts:

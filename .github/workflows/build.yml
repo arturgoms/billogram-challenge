@@ -7,15 +7,15 @@ on:
     branches: [master]
 
 env:
-  IMAGE_NAME: django-base
+  IMAGE_NAME: discount-service
 
 jobs:
   lint_django_job:
-    uses: arturgoms/django-base/.github/workflows/lint.yml@master
+    uses: arturgoms/billogram-challenge/.github/workflows/lint.yml@master
   test_django_job:
-    uses: arturgoms/django-base/.github/workflows/tests.yml@master
+    uses: arturgoms/billogram-challenge/.github/workflows/tests.yml@master
   format_django_job:
-    uses: arturgoms/django-base/.github/workflows/format.yml@master
+    uses: arturgoms/billogram-challenge/.github/workflows/format.yml@master
   build:
     name: Build
     runs-on: ubuntu-latest
@@ -28,7 +28,7 @@ jobs:
           registry: ghcr.io
           username: arturgoms
           password: ${{ secrets.CR_PAT }}
-      - name: Build the django-base Docker image
+      - name: Build the dicount-service Docker image
         run: |
           docker build -t $IMAGE_NAME -f containers/web/Dockerfile .
       - name: Push image to GitHub Container Registry
