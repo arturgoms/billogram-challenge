@@ -1,6 +1,6 @@
 #+TITLE: Django base
 
-#+html: <p align="center"><img src="https://github.com/arturgoms/django-base/actions/workflows/build.yml/badge.svg" /><img src="https://github.com/arturgoms/django-base/actions/workflows/tests.yml/badge.svg" /><img src="https://github.com/arturgoms/django-base/actions/workflows/lint.yml/badge.svg" /><img src="https://github.com/arturgoms/django-base/actions/workflows/format.yml/badge.svg" /></p>
+#+html: <p align="center"><img src="https://github.com/arturgoms/billogram-challenge/actions/workflows/build.yml/badge.svg" /><img src="https://github.com/arturgoms/billogram-challenge/actions/workflows/tests.yml/badge.svg" /><img src="https://github.com/arturgoms/billogram-challenge/actions/workflows/lint.yml/badge.svg" /><img src="https://github.com/arturgoms/billogram-challenge/actions/workflows/format.yml/badge.svg" /></p>
 
 * The Project
 
@@ -26,8 +26,8 @@ This is a project that aims to create a real world production ready Django appli
 *** Minimal environment
 1. Clone and enter the dir
 #+BEGIN_SRC shell
-git clone git@github.com:arturgoms/django-base.git
-cd django-base
+git clone git@github.com:arturgoms/billogram-challenge.git
+cd billogram-challenge
 #+END_SRC
 2. Create the environment:
 #+BEGIN_SRC shell
@@ -59,7 +59,7 @@ Alternatively you can run everything inside container but you ill need to build 
 Go to .env and uncomment the line 17 and 30:
 
 #+BEGIN_SRC shell
-17 DATABASE_URL=postgres://postgres:postgres@db:5432/base
+17 DATABASE_URL=postgres://postgres:postgres@db:5432/discount-service
 30 CELERY_BROKER_URL=redis://:@redis:6379/0
 #+END_SRC
 

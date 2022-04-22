@@ -8,4 +8,4 @@ data:
   DEBUG: "False"
   DJANGO_SETTINGS_MODULE: "settings.production"
   CELERY_BROKER_URL: "redis://:@redis:6379/0"
-  DATABASE_URL: "postgres://postgres:postgres@pgbouncer:5432/base"
+  DATABASE_URL: "postgres://postgres:postgres@pgbouncer:5432/discount-service"

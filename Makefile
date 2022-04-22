@@ -25,3 +25,9 @@ k8s-create-secret:
 
 helm-deploy:
 	helm upgrade --install django-app ./helm/django-app
+
+migrate:
+	python src/manage.py migrate
+
+make-migrations:
+	python src/manage.py makemigrations

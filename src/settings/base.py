@@ -113,7 +113,7 @@ WSGI_APPLICATION = "wsgi.application"
 DATABASES = {
     "default": config(
         "DATABASE_URL",
-        default="postgres://postgres:postgres@localhost:5432/base",
+        default="postgres://postgres:postgres@localhost:5432/discount-service",
         cast=dj_database_url.parse,
     )
 }
