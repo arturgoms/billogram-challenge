@@ -1,0 +1,7 @@
+{% extends 'admin/simple_form.html' %}
+
+{% load i18n %}
+
+{% block submit-row-buttons %}
+    <input type="submit" name="_saveasnew" value="{% trans 'Change role' %}" class="default">
+{% endblock %}

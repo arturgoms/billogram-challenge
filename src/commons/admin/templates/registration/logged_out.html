@@ -1,0 +1,26 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/login.css" %}">
+{% endblock %}
+
+{% block bodyclass %}{{ block.super }} login{% endblock %}
+
+{% block version %}{% endblock %}
+{% block admin_shortcuts %}{% endblock %}
+{% block breadcrumbs %}{% endblock %}
+{% block nav-sidebar %}{% endblock %}
+
+{% block content %}
+    <div id="content-main">
+        <p>{% trans "Thanks for spending some quality time with the Web site today." %}</p>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a class="button" href="{% url 'admin:index' %}" style="display: inline-block; padding: 10px 15px; color: white;">
+                {% trans 'Log in again' %}
+            </a>
+        </div>
+    </div>
+{% endblock %}

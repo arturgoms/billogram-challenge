@@ -1,0 +1,90 @@
+{% load i18n %}
+<input type="{{ widget.type }}" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>
+<input id="id_{{ widget.name }}_file" accept="image/*" type="file" style="display: none;" />
+
+<div class="cropper">
+  <div id="id_{{ widget.name }}_content">
+    <div class="cropper-preview">
+      <img class="img-preview" id="id_{{ widget.name }}_preview" src="{% if widget.is_initial %}{{ widget.value.url }}{% else %}data:image/png;base64,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{% endif %}" />
+    </div>
+
+    <div class="cropper-actions">
+      <label class="button" for="id_{{ widget.name }}_file">{{ widget.input_text }}</label>
+    </div>
+  </div>
+
+  <div id="id_{{ widget.name }}_cropper" class="cropper-container-wrap" style="width: 600px; display: none;">
+    <div style="width: 600px; height: 300px">
+      <img id="id_{{ widget.name }}_img" src="" />
+    </div>
+
+    <div class="cropper-buttons">
+      <div class="aspect-ratios">
+      {% for x, y in widget.aspect_ratios %}
+        <button class="button button-aspect-ratio btn_{{ widget.name }}_aspect" data-aspect-ratio="{{ x }}:{{ y }}" type="button">{{ x }}:{{ y }}</button>
+      {% endfor %}
+      </div>
+
+      <div class="cropper-action-buttons">
+        <button class="button cancel-link" id="id_btn_{{ widget.name }}_cancel" type="button">{% trans 'Cancel' %}</button>
+        <button class="button" id="id_btn_{{ widget.name }}_crop" type="button">{% trans 'Crop' %}</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script type="text/javascript">
+  (function($) {
+    $(document).ready(function() {
+      let cropper = null;
+
+      $(".btn_{{ widget.name }}_aspect[data-aspect-ratio]").on("click", function() {
+        const aspect = $(this).data("aspect-ratio").split(":");
+        cropper.setAspectRatio(parseInt(aspect[0]) / parseInt(aspect[1]))
+      });
+
+      $("#id_btn_{{ widget.name }}_cancel").on('click', function () {
+        cropper.destroy();
+        $('#id_{{ widget.name }}_file')[0].value = null;
+        $('#id_{{ widget.name }}_cropper').hide();
+        $('#id_{{ widget.name }}_content').show();
+      });
+
+      $("#id_btn_{{ widget.name }}_crop").on('click', function() {
+        const b64data = cropper.getCroppedCanvas().toDataURL('image/jpeg');
+
+        $('#id_{{ widget.name }}_preview')[0].src = b64data;
+        $('#id_{{ widget.name }}')[0].value = b64data;
+
+        cropper.destroy();
+        $('#id_{{ widget.name }}_file')[0].value = null;
+        $('#id_{{ widget.name }}_cropper').hide();
+        $('#id_{{ widget.name }}_content').show();
+      });
+
+      $("#id_{{ widget.name }}_file").on('change', function () {
+        const file = $(this)[0].files[0];
+        const reader  = new FileReader();
+
+        reader.onloadend = function () {
+          $('#id_{{ widget.name }}_content').hide();
+          $('#id_{{ widget.name }}_cropper').show();
+
+          cropper = new Cropper(
+            $("#id_{{ widget.name }}_img")[0], {
+              {% if widget.aspect_ratios %}aspectRatio: {{ widget.aspect_ratios.0.0 }} / {{ widget.aspect_ratios.0.1 }},{% endif %}
+              minCropBoxWidth: 100,
+              minCropBoxHeight: 100
+            });
+
+          cropper.replace(reader.result)
+        };
+
+        if (file) {
+          reader.readAsDataURL(file);
+        }
+      });
+    });
+  }(django.jQuery));
+</script>

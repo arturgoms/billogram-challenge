@@ -1,0 +1,84 @@
+#+TITLE: Django base
+
+#+html: <p align="center"><img src="https://github.com/arturgoms/django-base/actions/workflows/build.yml/badge.svg" /><img src="https://github.com/arturgoms/django-base/actions/workflows/tests.yml/badge.svg" /><img src="https://github.com/arturgoms/django-base/actions/workflows/lint.yml/badge.svg" /><img src="https://github.com/arturgoms/django-base/actions/workflows/format.yml/badge.svg" /></p>
+
+* The Project
+
+This is a project that aims to create a real world production ready Django application architecture.
+
+** Features
+- Django 4 project with a really nice structure
+- Locale to translate the panel
+- Admin panel that is not ugly as hell
+- Silk to manage queries
+- Redoc to show the api doc inside admin panel
+- Docker compose file to run the production environment locally
+- Docker image with everything that the django app needs
+- Using gunicorn so we can have a better performance in production
+- Celery Task and Scheduler to you can schedule tasks
+- Flower to see what celery is doing
+- Postgres 13 as database with pgbouncer as connection pooler
+- Poetry to manage dependencies
+- Test, Link (pylint), Formatter (black), Build pipelines
+- Make file with a lot of shortcuts
+- Kubernets architecture
+** Development
+*** Minimal environment
+1. Clone and enter the dir
+#+BEGIN_SRC shell
+git clone git@github.com:arturgoms/django-base.git
+cd django-base
+#+END_SRC
+2. Create the environment:
+#+BEGIN_SRC shell
+poetry install
+#+END_SRC
+3. Enter in the shell
+#+BEGIN_SRC shell
+source $(poetry env info --path)/bin/activate
+#+END_SRC
+4. I usually just run the postgres inside docker like this:
+#+BEGIN_SRC shell
+docker compose up db -d
+#+END_SRC
+Run the migrations:
+#+BEGIN_SRC shell
+python src/manage.py migrate
+#+END_SRC
+And then run the django project locally:
+#+BEGIN_SRC shell
+python src/manage.py runserver
+#+END_SRC
+5. Access:
+   admin - http:/127.0.0.1:8000/admin
+   silk - http:/127.0.0.1:8000/silk
+
+*** Docker compose
+Alternatively you can run everything inside container but you ill need to build it everytime that you change something in the django app
+
+Go to .env and uncomment the line 17 and 30:
+
+#+BEGIN_SRC shell
+17 DATABASE_URL=postgres://postgres:postgres@db:5432/base
+30 CELERY_BROKER_URL=redis://:@redis:6379/0
+#+END_SRC
+
+Up the containers:
+#+BEGIN_SRC shell
+docker compose up -d
+#+END_SRC
+To rebuild:
+#+BEGIN_SRC shell
+docker compose up -d --build
+#+END_SRC
+Now you need to use the nginx port to access it:
+   admin - http:/127.0.0.1:1337/admin
+And Silk will not exist anymore because you are using a 'production like' environment.
+** Production
+In production you will need to apply the configs for kubernets.
+
+* TODO
+Next steps:
+
+*** TODO Create workflow for rollout the kubernets images
+*** TODO Create kubernets files for: Celery, Worker and Flower Dashboard

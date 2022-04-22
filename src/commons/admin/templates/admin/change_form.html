@@ -1,0 +1,9 @@
+{% extends "admin/change_form.html" %}
+
+{% block object-tools-items %}
+    {# load all tools created on admin site #}
+    {% for tool in object_tools %}{{ tool|safe }}{% endfor %}
+
+    {# load defaults #}
+    {{ block.super }}
+{% endblock %}

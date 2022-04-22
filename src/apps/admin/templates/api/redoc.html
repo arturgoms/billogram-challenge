@@ -1,0 +1,41 @@
+{% extends 'admin/base_site.html' %}
+
+{% block extrastyle %}
+  {{ block.super }}
+
+  <style>
+    redoc {
+      display: block;
+    }
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: white;
+    }
+    .content #content { padding: 0 !important; margin: 0 !important; }
+    .content #footer { padding: 0 !important; margin: 0 !important; }
+
+  </style>
+
+{% endblock %}
+
+{% block content_title %}{% endblock %}
+{% block content_subtitle %}{% endblock %}
+{% block nav-sidebar %}{% endblock %}
+
+{% block content %}
+    <div id="redoc-container"></div>
+    <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"> </script>
+    <script type="text/javascript">
+    (function() {
+      Redoc.init(
+        "http://127.0.0.1:8000/en-us/admin/api/docs/specs/",
+        {
+          "untrustedSpec": true
+        },
+        document.getElementById('redoc-container'));
+    })();
+    </script>
+{% endblock %}
+
+{% block admin_shortcuts %}{% endblock %}

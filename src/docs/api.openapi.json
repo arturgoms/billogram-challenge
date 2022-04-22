@@ -1,0 +1,176 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Base Django API Specification",
+    "description": "Base Django API Specification",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Base Django",
+      "email": "contato@arturgomes.com.br",
+      "url": "www.arturgomes.com.br"
+    }
+  },
+  "servers": [
+    {
+      "url": "//127.0.0.1:8000/api"
+    }
+  ],
+  "paths": {
+    "/health/": {
+      "get": {
+        "summary": "Check the health of the API",
+        "tags": [
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "detail": "string",
+                      "errors": [
+                        {
+                          "field": "FIELD_NAME",
+                          "errors": [
+                            "ERROR_MESSAGE"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "detail": "Authentication credentials were not provided."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-api-health",
+        "description": "Check the health of the API"
+      }
+    }
+  },
+  "tags": [
+  ],
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "PublicAuth": {
+        "type": "http",
+        "scheme": "public"
+      }
+    },
+    "schemas": {
+      "BadRequest": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "type": "string"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "field": {
+                  "type": "string",
+                  "example": "FIELD_NAME"
+                },
+                "errors": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "ERROR_MESSAGE"
+                  }
+                }
+              },
+              "required": [
+                "field",
+                "errors"
+              ],
+              "additionalProperties": false
+            },
+            "required": [
+              "detail",
+              "errors"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "field_name"
+        ],
+        "additionalProperties": false
+      },
+      "Forbidden": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "type": "string",
+            "example": "Forbidden."
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "additionalProperties": false
+      },
+      "NotFound": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "type": "string",
+            "example": "Not Found."
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "additionalProperties": false
+      },
+      "Unauthorized": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "type": "string",
+            "example": "Authentication credentials were not provided."
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+}

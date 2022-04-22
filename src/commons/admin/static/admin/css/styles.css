@@ -1,0 +1,237 @@
+/* BRAND */
+
+#header #branding > #site-name a > img {
+  width: var(--brand-width);
+  padding: var(--brand-padding);
+}
+
+
+/* VERSION */
+
+#header .version {
+  position: absolute;
+  top: 0;
+  right: 40px;
+  font-size: 10px;
+  line-height: 10px;
+  padding: 5px 0;
+  font-weight: 100;
+}
+
+
+/* USER TOOLS */
+
+#user-tools a:focus,
+#user-tools a:hover {
+  text-decoration: none;
+  border-bottom-color: var(--user-tools-border-bottom-hover-color);
+  color: var(--user-tools-hover-fg);
+}
+
+/* SHORTCUTS */
+
+.admin-shortcuts {
+  background: var(--body-bg);
+  padding: 20px 40px;
+  margin: 0;
+}
+
+.dashboard .admin-shortcuts {
+  border-bottom: 1px solid var(--hairline-color);
+}
+
+.admin-shortcuts > .shortcuts {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.admin-shortcuts > .shortcuts > li {
+  padding: 0;
+  margin: 0;
+  display: block;
+}
+
+.admin-shortcuts > .shortcuts > li > a {
+  padding: 12px 24px;
+  margin: 0;
+  display: block;
+  color: var(--shortcuts-item-fg);
+  background: var(--shortcuts-item-bg);
+  font-size: 14px;
+  line-height: 14px;
+  border-radius: 3px;
+  position: relative;
+  min-height: 14px;
+  text-decoration: none;
+}
+
+.admin-shortcuts > .shortcuts > li + li {
+  margin-left: 10px;
+}
+
+.admin-shortcuts > .shortcuts > li > a:hover,
+.admin-shortcuts > .shortcuts > li > a:focus,
+.admin-shortcuts > .shortcuts > li > a:active {
+  background: var(--shortcuts-item-hover-bg);
+}
+
+.admin-shortcuts > .shortcuts > li > a.active {
+  background: var(--shortcuts-item-hover-bg);
+}
+
+
+/* DROPDOWN */
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown > .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 9999;
+  display: none;
+  float: left;
+  min-width: 170px;
+  padding: 0;
+  margin: 15px 0 0;
+  font-size: 14px;
+  text-align: left;
+  list-style: none;
+  background-color: var(--default-dropdown-bg);
+  background-clip: padding-box;
+  border-radius: 4px;
+}
+
+.dropdown > .dropdown-menu > li {
+  position: relative;
+  float: none;
+  display: block;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown > .dropdown-menu > li:first-child > a {
+  border-radius: 4px 4px 0 0;
+}
+
+.dropdown > .dropdown-menu > li:last-child > a {
+  border-radius: 0 0 4px 4px;
+  border-bottom: 0;
+}
+
+.dropdown > .dropdown-menu > li > a {
+  position: relative;
+  display: block;
+  float: none;
+  padding: 11px 15px 11px 12px;
+  margin: 0;
+  clear: both;
+  font-weight: 400;
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: var(--default-dropdown-bg);
+  color: var(--default-dropdown-fg);
+  border-radius: 0;
+  border-bottom: 1px solid var(--default-dropdown-border-color);
+}
+
+.dropdown > .dropdown-menu > li > a:hover,
+.dropdown > .dropdown-menu > li > a:focus,
+.dropdown > .dropdown-menu > li > a:active {
+  background: var(--default-dropdown-hover-bg);
+}
+
+/* CROPPER */
+
+.cropper {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  margin-bottom: 0;
+}
+
+.cropper .cropper-preview {
+  height: 300px;
+  background-color: var(--body-bg);
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid var(--hairline-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cropper .cropper-preview > img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.cropper .cropper-actions,
+.cropper .cropper-buttons
+{
+  margin: 10px 0 0;
+  padding: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.cropper .cropper-actions {
+  justify-content: flex-end;
+}
+
+@media (prefers-color-scheme: dark) {
+  .cropper .cropper-actions,
+  .cropper .cropper-buttons {
+    background-color: var(--primary);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .cropper .cropper-actions,
+  .cropper .cropper-buttons {
+    background: var(--darkened-bg);
+    border: 1px solid var(--hairline-color);
+  }
+}
+
+.cropper .cropper-actions > label.button,
+.cropper .cropper-buttons .button {
+  float: none;
+  font-size: 12px;
+  width: auto;
+  line-height: inherit;
+  display: inline-block;
+  padding: 8px 12px;
+  margin: 0;
+}
+
+.cropper .cropper-actions > label.button::after,
+.cropper .cropper-buttons > .button::after
+{
+  height: auto;
+}
+
+.cropper .cropper-actions > label.button + .button,
+.cropper .cropper-buttons .button + .button {
+  margin-left: 5px;
+}
+
+.cropper .cropper-buttons .button.cancel-link {
+  background-color: var(--close-button-bg);
+}
+
+.cropper .cropper-buttons .button.cancel-link:hover,
+.cropper .cropper-buttons .button.cancel-link:focus,
+.cropper .cropper-buttons .button.cancel-link:active
+{
+  background-color: var(--close-button-hover-bg);
+}
+

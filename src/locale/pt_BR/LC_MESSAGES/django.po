@@ -1,0 +1,590 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-04-12 11:29-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: apps/admin/apps.py:8 commons/admin/apps.py:8
+msgid "Admin"
+msgstr ""
+
+#: apps/admin/docs/admin.py:19
+msgid "API Docs"
+msgstr ""
+
+#: apps/admin/templates/admin/domain/user/block_form.html:8
+#: apps/admin/templates/admin/domain/user/demote_form.html:8
+#: apps/admin/templates/admin/domain/user/promote_form.html:8
+#: apps/admin/templates/admin/domain/user/reset_password_form.html:8
+#: apps/admin/templates/admin/dynamic_config/change_form.html:20
+#: commons/admin/templates/admin/hierarchy_admin/change_form.html:7
+#: commons/admin/templates/admin/hierarchy_admin/change_list.html:6
+#: commons/admin/templates/admin/hierarchy_admin/delete_confirmation.html:6
+#: commons/admin/templates/admin/hierarchy_admin/object_history.html:6
+#: commons/admin/templates/admin/simple_form.html:20
+#: commons/admin/templates/admin/tags/shortcuts.html:7 commons/admin/urls.py:10
+#: settings/base.py:250
+msgid "Home"
+msgstr ""
+
+#: apps/admin/templates/admin/domain/user/block_form.html:18
+#, python-format
+msgid ""
+"Are you sure you want to block the %(object_name)s \"%(escaped_object)s\"?"
+msgstr ""
+
+#: apps/admin/templates/admin/domain/user/block_form.html:19
+#, python-format
+msgid ""
+"The %(object_name)s will no longer be able to access the platform if blocked."
+msgstr ""
+
+#: apps/admin/templates/admin/domain/user/block_form.html:25
+#: apps/admin/templates/admin/domain/user/demote_form.html:25
+#: apps/admin/templates/admin/domain/user/promote_form.html:25
+#: apps/admin/templates/admin/domain/user/reset_password_form.html:26
+msgid "Yes, I’m sure"
+msgstr ""
+
+#: apps/admin/templates/admin/domain/user/block_form.html:26
+#: apps/admin/templates/admin/domain/user/demote_form.html:26
+#: apps/admin/templates/admin/domain/user/promote_form.html:26
+#: apps/admin/templates/admin/domain/user/reset_password_form.html:27
+msgid "No, take me back"
+msgstr ""
+
+#: apps/admin/templates/admin/domain/user/change_role_form.html:6
+msgid "Change role"
+msgstr ""
+
+#: apps/admin/templates/admin/domain/user/demote_form.html:18
+#, python-format
+msgid ""
+"Are you sure you want to demote the %(object_name)s \"%(escaped_object)s\"?"
+msgstr ""
+
+#: apps/admin/templates/admin/domain/user/demote_form.html:19
+#, python-format
+msgid "The %(object_name)s will no longer be able modify the system anymore."
+msgstr ""
+
+#: apps/admin/templates/admin/domain/user/invite_form.html:6
+msgid "Invite"
+msgstr ""
+
+#: apps/admin/templates/admin/domain/user/promote_form.html:18
+#, python-format
+msgid ""
+"Are you sure you want to promote the %(object_name)s \"%(escaped_object)s\"?"
+msgstr ""
+
+#: apps/admin/templates/admin/domain/user/promote_form.html:19
+#, python-format
+msgid "The %(object_name)s will be able to change everything in the system."
+msgstr ""
+
+#: apps/admin/templates/admin/domain/user/reset_password_form.html:18
+#, python-format
+msgid ""
+"Are you sure you want to reset the %(object_name)s \"%(escaped_object)s\" "
+"password?"
+msgstr ""
+
+#: apps/admin/templates/admin/domain/user/reset_password_form.html:19
+#, python-format
+msgid ""
+"The %(object_name)s will no longer be able login with previous password."
+msgstr ""
+
+#: apps/admin/templates/admin/domain/user/reset_password_form.html:20
+#, python-format
+msgid "The %(object_name)s will receive the new password by email."
+msgstr ""
+
+#: apps/admin/templates/admin/dynamic_config/change_form.html:61
+#: commons/admin/templates/admin/hierarchy_admin/submit_line.html:4
+#: commons/admin/templates/admin/simple_form.html:63
+msgid "Save"
+msgstr ""
+
+#: apps/admin/user/admin.py:33
+msgid "Administration"
+msgstr ""
+
+#: apps/admin/user/admin.py:41
+msgid "Contact"
+msgstr ""
+
+#: apps/admin/user/admin.py:44 apps/domain/models/user/models.py:30
+msgid "Status"
+msgstr ""
+
+#: apps/admin/user/admin.py:51
+msgid "Block"
+msgstr ""
+
+#: apps/admin/user/admin.py:58
+msgid "Unblock"
+msgstr ""
+
+#: apps/admin/user/admin.py:62
+msgid "Promote"
+msgstr ""
+
+#: apps/admin/user/admin.py:69
+msgid "Demote"
+msgstr ""
+
+#: apps/admin/user/admin.py:76
+msgid "Change Roles"
+msgstr ""
+
+#: apps/admin/user/admin.py:82
+msgid "Reset Password"
+msgstr ""
+
+#: apps/admin/user/admin.py:89 apps/admin/user/admin.py:137
+#, python-format
+msgid "Invite %(verbose_name)s"
+msgstr ""
+
+#: apps/admin/user/admin.py:97 apps/domain/models/user/models.py:24
+msgid "Email"
+msgstr ""
+
+#: apps/admin/user/admin.py:104 apps/domain/models/user/models.py:17
+msgid "Active"
+msgstr ""
+
+#: apps/admin/user/admin.py:144 apps/admin/user/admin.py:186
+msgid "Permissions"
+msgstr ""
+
+#: apps/admin/user/admin.py:173 apps/admin/user/admin.py:276
+#: apps/admin/user/admin.py:313 apps/admin/user/admin.py:350
+#, python-brace-format
+msgid "The {name} “{obj}” was changed successfully."
+msgstr ""
+
+#: apps/admin/user/admin.py:182
+#, python-format
+msgid "Change Role for %(verbose_name)s"
+msgstr ""
+
+#: apps/admin/user/admin.py:208
+#, python-brace-format
+msgid "The {name} \"{obj}\" was blocked successfully."
+msgstr ""
+
+#: apps/admin/user/admin.py:217
+msgid "Blocked."
+msgstr ""
+
+#: apps/admin/user/admin.py:224 apps/admin/user/admin.py:285
+#: apps/admin/user/admin.py:322 apps/admin/user/admin.py:359
+msgid "Are you sure?"
+msgstr ""
+
+#: apps/admin/user/admin.py:243
+#, python-brace-format
+msgid "The {name} \"{obj}\" was unblocked successfully."
+msgstr ""
+
+#: apps/admin/user/admin.py:252
+msgid "Unblocked."
+msgstr ""
+
+#: apps/admin/user/forms/change_roles_form.py:11
+#: apps/admin/user/forms/change_roles_form.py:12
+#: apps/admin/user/forms/invite_form.py:11
+#: apps/admin/user/forms/invite_form.py:12
+msgid "Roles"
+msgstr ""
+
+#: apps/admin/views/dynamic_config/dynamic_config_admin.py:29
+#: apps/admin/views/dynamic_config/dynamic_config_admin.py:38
+#: settings/base.py:265
+msgid "Settings"
+msgstr ""
+
+#: apps/admin/views/dynamic_config/dynamic_config_admin.py:37
+#, python-brace-format
+msgid "The {name} was updated successfully!"
+msgstr ""
+
+#: apps/api/apps.py:7
+msgid "API"
+msgstr ""
+
+#: apps/domain/apps.py:7
+msgid "Domain"
+msgstr ""
+
+#: apps/domain/models/dynamic_config_parameter/models.py:10
+msgid "Key"
+msgstr ""
+
+#: apps/domain/models/dynamic_config_parameter/models.py:14
+msgid "Value"
+msgstr ""
+
+#: apps/domain/models/dynamic_config_parameter/models.py:18
+msgid "Dynamic Config Parameter"
+msgstr ""
+
+#: apps/domain/models/dynamic_config_parameter/models.py:19
+msgid "Dynamic Config Parameters"
+msgstr ""
+
+#: apps/domain/models/user/emails.py:15 apps/domain/models/user/emails.py:40
+msgid "Panel Access"
+msgstr ""
+
+#: apps/domain/models/user/emails.py:26 apps/domain/models/user/emails.py:51
+msgid "Access My Account"
+msgstr ""
+
+#: apps/domain/models/user/models.py:18
+msgid "Blocked"
+msgstr ""
+
+#: apps/domain/models/user/models.py:21
+msgid "Name"
+msgstr ""
+
+#: apps/domain/models/user/models.py:27
+msgid "Date Joined"
+msgstr ""
+
+#: apps/domain/models/user/models.py:38
+msgid "Is Superuser"
+msgstr ""
+
+#: apps/domain/models/user/models.py:44
+#: apps/domain/models/user_role/models.py:10
+msgid "User"
+msgstr ""
+
+#: apps/domain/models/user/models.py:45 settings/base.py:257
+msgid "Users"
+msgstr ""
+
+#: apps/domain/models/user_role/models.py:15
+msgid "Role"
+msgstr ""
+
+#: apps/domain/models/user_role/models.py:20
+msgid "User Role"
+msgstr ""
+
+#: apps/domain/models/user_role/models.py:21
+msgid "Users Roles"
+msgstr ""
+
+#: commons/admin/forms/widgets.py:93
+#: commons/admin/templates/admin/app_list.html:29
+msgid "Change"
+msgstr ""
+
+#: commons/admin/groups.py:7
+msgid "Default"
+msgstr ""
+
+#: commons/admin/templates/admin/app_list.html:9
+#, python-format
+msgid "Models in the %(name)s application"
+msgstr ""
+
+#: commons/admin/templates/admin/app_list.html:20
+msgid "Add"
+msgstr ""
+
+#: commons/admin/templates/admin/app_list.html:27
+msgid "View"
+msgstr ""
+
+#: commons/admin/templates/admin/base_site.html:4
+msgid "Django site admin"
+msgstr ""
+
+#: commons/admin/templates/admin/base_site.html:28
+msgid "Django administration"
+msgstr ""
+
+#: commons/admin/templates/admin/hierarchy_admin/change_form.html:12
+#: commons/admin/templates/admin/hierarchy_admin/change_list.html:23
+#, python-format
+msgid "Add %(name)s"
+msgstr ""
+
+#: commons/admin/templates/admin/hierarchy_admin/change_form.html:24
+#: commons/admin/templates/admin/hierarchy_admin/object_history.html:12
+msgid "History"
+msgstr ""
+
+#: commons/admin/templates/admin/hierarchy_admin/change_form.html:28
+msgid "View on site"
+msgstr ""
+
+#: commons/admin/templates/admin/hierarchy_admin/change_list.html:31
+msgid "Filter"
+msgstr ""
+
+#: commons/admin/templates/admin/hierarchy_admin/change_list.html:33
+msgid "Clear all filters"
+msgstr ""
+
+#: commons/admin/templates/admin/hierarchy_admin/change_list.html:36
+#, python-format
+msgid " By %(filter_title)s "
+msgstr ""
+
+#: commons/admin/templates/admin/hierarchy_admin/delete_confirmation.html:12
+#: commons/admin/templates/admin/hierarchy_admin/submit_line.html:8
+msgid "Delete"
+msgstr ""
+
+#: commons/admin/templates/admin/hierarchy_admin/submit_line.html:10
+msgid "Save as new"
+msgstr ""
+
+#: commons/admin/templates/admin/hierarchy_admin/submit_line.html:11
+msgid "Save and add another"
+msgstr ""
+
+#: commons/admin/templates/admin/hierarchy_admin/submit_line.html:12
+msgid "Save and continue editing"
+msgstr ""
+
+#: commons/admin/templates/admin/hierarchy_admin/submit_line.html:12
+msgid "Save and view"
+msgstr ""
+
+#: commons/admin/templates/admin/hierarchy_admin/submit_line.html:13
+msgid "Close"
+msgstr ""
+
+#: commons/admin/templates/admin/includes/copyable.html:4
+msgid "Copy"
+msgstr ""
+
+#: commons/admin/templates/admin/includes/copyable.html:4
+msgid "Copied!"
+msgstr ""
+
+#: commons/admin/templates/admin/index.html:21
+msgid "Recent actions"
+msgstr ""
+
+#: commons/admin/templates/admin/index.html:22
+msgid "My actions"
+msgstr ""
+
+#: commons/admin/templates/admin/index.html:26
+msgid "None available"
+msgstr ""
+
+#: commons/admin/templates/admin/index.html:40
+msgid "Unknown content"
+msgstr ""
+
+#: commons/admin/templates/forms/widgets/image_cropper.html:29
+msgid "Cancel"
+msgstr ""
+
+#: commons/admin/templates/forms/widgets/image_cropper.html:30
+msgid "Crop"
+msgstr ""
+
+#: commons/admin/templates/registration/logged_out.html:18
+msgid "Thanks for spending some quality time with the Web site today."
+msgstr ""
+
+#: commons/admin/templates/registration/logged_out.html:22
+msgid "Log in again"
+msgstr ""
+
+#: commons/admin/urls.py:8 commons/admin/urls.py:9
+msgid "Site Administration"
+msgstr ""
+
+#: commons/api/fields.py:12
+#, python-brace-format
+msgid "Datetime has wrong format. Use one of these formats instead: {format}."
+msgstr ""
+
+#: commons/api/fields.py:13
+#, python-brace-format
+msgid "Invalid datetime for the timezone \"{timezone}\"."
+msgstr ""
+
+#: commons/api/fields.py:14
+msgid "Datetime value out of range."
+msgstr ""
+
+#: commons/api/permissions.py:26
+msgid "Invalid authorization header."
+msgstr ""
+
+#: commons/api/serializers.py:24
+msgid "The 'start_date' must be less than or equal to 'end_date'."
+msgstr ""
+
+#: commons/currency.py:7
+msgid "ARS (Argentine peso)"
+msgstr ""
+
+#: commons/currency.py:8
+msgid "BRL (Brazilian real)"
+msgstr ""
+
+#: commons/currency.py:9
+msgid "CLP (Chilean peso)"
+msgstr ""
+
+#: commons/currency.py:10
+msgid "COP (Colombian peso)"
+msgstr ""
+
+#: commons/currency.py:11
+msgid "CUP (Cuban peso)"
+msgstr ""
+
+#: commons/currency.py:12
+msgid "DOP (Dominican peso)"
+msgstr ""
+
+#: commons/currency.py:13
+msgid "MXN (Mexican peso)"
+msgstr ""
+
+#: commons/currency.py:14
+msgid "PHP (Philippine peso)"
+msgstr ""
+
+#: commons/currency.py:15
+msgid "USD (United States dollar)"
+msgstr ""
+
+#: commons/currency.py:16
+msgid "UYU (Uruguayan peso)"
+msgstr ""
+
+#: commons/exceptions.py:8
+#, python-brace-format
+msgid "Invalid transaction id \"{value}\" - already exists."
+msgstr ""
+
+#: commons/models/audit.py:8
+msgid "Created At"
+msgstr ""
+
+#: commons/models/audit.py:11
+msgid "Updated At"
+msgstr ""
+
+#: commons/models/uuid.py:10
+msgid "Id"
+msgstr ""
+
+#: commons/validators.py:8
+msgid "Invalid Value."
+msgstr ""
+
+#: commons/validators.py:40
+#, python-format
+msgid ""
+"File Size \"%(current_size)s\" is not allowed. Allowed size %(max_size)s."
+msgstr ""
+
+#: commons/validators.py:74
+#, python-format
+msgid ""
+"Image resolution \"%(current_resolution)s\" is not allowed. Allowed "
+"resolutions are: %(allowed_resolutions)s."
+msgstr ""
+
+#: settings/base.py:158
+msgid "English"
+msgstr ""
+
+#: settings/base.py:158
+msgid "Brazilian Portuguese"
+msgstr ""
+
+#: settings/base.py:294
+msgid "Example settings"
+msgstr ""
+
+#: settings/base.py:295
+msgid "Just a example of how settings is inside admin."
+msgstr ""
+
+#: settings/base.py:296
+msgid "Example"
+msgstr ""
+
+#: settings/base.py:529
+msgid "Teacher Messages"
+msgstr ""
+
+#: settings/base.py:530 settings/base.py:549
+msgid "New messages received."
+msgstr ""
+
+#: settings/base.py:535 settings/base.py:554
+msgid "Change or Session Cancellation"
+msgstr ""
+
+#: settings/base.py:536 settings/base.py:555
+msgid "Session information, updates or session cancellation."
+msgstr ""
+
+#: settings/base.py:541 settings/base.py:560
+msgid "Session Completed"
+msgstr ""
+
+#: settings/base.py:542 settings/base.py:561
+msgid "Session information and video access."
+msgstr ""
+
+#: settings/base.py:548
+msgid "Student Messages"
+msgstr ""
+
+#: templates/email/base.html:103
+msgid ""
+"Do not answer this email. If you still have any doubts, please contact us."
+msgstr ""
+
+#: templates/email/base.html:176
+msgid "If you no longer wish to receive these emails, please change your"
+msgstr ""
+
+#: templates/email/base.html:176
+msgid "email preferences"
+msgstr ""
+
+#: templates/email/user/invite.html:17
+#: templates/email/user/new_password.html:17
+msgid "Use your email and the following password to access your account:"
+msgstr ""
+
+#: templates/email/user/invite.html:49
+#: templates/email/user/new_password.html:49
+msgid "After logging in, you can change your password."
+msgstr ""

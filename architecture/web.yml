@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-app-deployment
+  labels:
+    app: django-base
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: django-base
+  template:
+    metadata:
+      labels:
+        app: django-base
+    spec:
+      containers:
+      - name: django-base
+        image: ghcr.io/arturgoms/django-base:1.0.5
+        imagePullPolicy: Always
+        envFrom:
+          - configMapRef:
+              name: app-config
+        env:
+          - name: STARTUP
+            value: "APP"
+          - name: DATABASE_URL
+            valueFrom:
+              configMapKeyRef:
+                name: app-config
+                key: DATABASE_URL
+        ports:
+          - containerPort: 80
+            name: gunicorn
+      imagePullSecrets:
+        - name: dockerconfigjson-github-com
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: django-cluster-ip-service
+spec:
+  type: NodePort
+  selector:
+    app: django-base
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 31000

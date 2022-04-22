@@ -1,0 +1,17 @@
+{% load i18n %}
+{% if shortcuts %}
+<div class="admin-shortcuts">
+    <ul class="shortcuts">
+        <li>
+            {% url 'admin:index' as admin_index_url %}
+            <a class="shortcut{% if request.path == admin_index_url %} active{% endif %}" href="{% url 'admin:index' %}" title="{% trans 'Home' %}">
+                <i class="shortcut-icon fa fa-home"></i>
+            </a>
+        </li>
+
+        {% for shortcut in shortcuts %}
+            <li>{{ shortcut.render|safe }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}

@@ -1,0 +1,8 @@
+{% load i18n %}
+  <span style="display: flex; align-items: flex-start" class="input-group">
+      <span style="display: block; margin: 0; padding: 4px 8px; border-radius: 4px 0 0 4px; background-color: var(--darkened-bg); color: var(--body-fg)" id="{{ field_id }}">{{ content }}</span>
+      <button style="display: block; margin: 0; padding: 4px 8px; border-radius: 0 4px 4px 0" class="button" type="button" data-original-text="{% translate 'Copy' %}" data-post-action-text="{% translate 'Copied!' %}" data-copy="{{ field_id }}">{% translate 'Copy' %}</button>
+  </span>
+{% if help_text %}
+  <div style="margin-left: 0; margin-top: 5px; padding-left: 0;" class="help">{{ help_text }}</div>
+{% endif %}

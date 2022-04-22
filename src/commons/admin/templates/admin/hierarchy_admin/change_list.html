@@ -1,0 +1,46 @@
+{% extends 'admin/change_list.html' %}
+{% load i18n admin_urls admin_list %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">{% translate 'Home' %}</a>
+&rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
+&rsaquo; <a href="{% url parent.opts|admin_urlname:'changelist' %}">{{ parent.opts.verbose_name_plural|capfirst }}</a>
+&rsaquo; <a href="{% url parent.opts|admin_urlname:'change' parent.object.pk %}">{{ parent.object|truncatewords:"18" }}</a>
+&rsaquo; {{ cl.opts.verbose_name_plural|capfirst }}
+</div>
+{% endblock %}
+
+{% block object-tools-items %}
+    {# load all tools created on admin site #}
+    {% for tool in object_tools %}{{ tool|safe }}{% endfor %}
+
+    {# load defaults #}
+    {% if has_add_permission %}
+        <li>
+            {% url cl.opts|admin_urlname:'add' as add_url %}
+            <a href="{% add_preserved_filters add_url is_popup to_field %}&{{ parent.url_arg }}={{ parent.object.pk }}" class="addlink">
+                {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
+            </a>
+        </li>
+    {% endif %}
+{% endblock %}
+
+{% block filters %}
+<div id="changelist-filter">
+<h2>{% translate 'Filter' %}</h2>
+{% if cl.has_active_filters %}<h3 id="changelist-filter-clear">
+  <a href="{{ cl.clear_all_filters_qs }}">&#10006; {% translate "Clear all filters" %}</a>
+</h3>{% endif %}
+
+<h3>{% blocktranslate with filter_title=parent.opts.verbose_name %} By {{ filter_title }} {% endblocktranslate %}</h3>
+
+<ul>
+    <li class="selected">
+        <a href="?{{ parent.url_arg }}={{ parent.object.pk }}" title="{{ parent.object }}">{{ parent.object }}</a>
+    </li>
+</ul>
+
+{% for spec in cl.filter_specs %}{% admin_list_filter cl spec %}{% endfor %}
+</div>
+{% endblock %}

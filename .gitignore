@@ -1,0 +1,49 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# PyInstaller:
+# Usually these files are written by a python script from a template
+# before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Unit test / coverage reports:
+cover/
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+htmlcov/
+
+# IDE:
+obj/
+bin/
+.idea/*
+.vscode/
+.vs/
+.DS_Store/
+*.pyproj
+*.pyproj.user
+*.sln
+
+# Django stuff:
+src/static/
+src/static_test/
+src/media/
+src/media_test/
+
+# Pip:
+Pipfile.lock
+
+# Environment:
+.env
+
+# Firebase:
+firebase-private-key.json
+
+# Project stuff:
+apps/pxadmin/static/admin/css/styles.min.css
+src/.DS_Store
+.env

@@ -1,0 +1,71 @@
+{% extends "admin/base.html" %}
+{% load i18n static admin %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/styles.css" %}">
+{% endblock %}
+
+{% block extrahead %}
+    <script type="text/javascript" src="{% static 'admin/js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'admin/js/components.js' %}"></script>
+
+    <style>
+        {% include 'admin/styles.css' %}
+    </style>
+
+    {{ block.super }}
+
+    <link rel="shortcut icon" href="{% static 'admin/img/favicon.png' %}" />
+{% endblock %}
+
+{% block branding %}
+    <h1 id="site-name">
+        <a href="{% url 'admin:index' %}">
+            <img src="{% static 'admin/img/brand.png' %}" alt="{{ site_header|default:_('Django administration') }}">
+        </a>
+    </h1>
+{% endblock %}
+
+{% block usertools %}
+  {{ block.super }}
+  {% block version %}<span class="version">{% version %}</span>{% endblock %}
+{% endblock %}
+
+{% block userlinks %}
+    {% get_current_language as LANGUAGE_CODE %}
+    {% admin_languages as languages %}
+
+    {% if languages|length > 1 %}
+        <div style="display: inline-block; margin: 0 20px;">
+        {% for language in languages %}
+            {% if language.code == LANGUAGE_CODE %}
+                <a title="{{ language.label }}" href="{{ language.url }}"><strong>{{ language.code }}</strong></a>
+            {% else %}
+                <a title="{{ language.label }}" href="{{ language.url }}">{{ language.code }}</a>
+            {% endif %}
+
+            {% if not forloop.last %} / {% endif %}
+        {% endfor %}
+        </div>
+    {% endif %}
+
+    {% get_user_links as links %}
+    {% for link in links %}
+        <a href="{{ link.url }}" title="{{ link.title }}" target="{{ link.target|default:'_self' }}">{{ link.title }}</a> /
+    {% endfor %}
+
+    {{ block.super }}
+{% endblock %}
+
+{% block nav-global %}
+    {% block admin_shortcuts %}
+        </div>  {# this closes the #header div #}
+        <div class="admin_shortcuts">
+        {% admin_shortcuts %}
+        {# </div>  don't close this one, because it's closed in base.html #}
+    {% endblock %}
+{% endblock %}

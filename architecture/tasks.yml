@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flower-app-deployment
+  labels:
+    app: flower-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flower-app
+  template:
+    metadata:
+      labels:
+        app: flower-app
+    spec:
+      containers:
+      - name: flower
+        image: mher/flower
+        imagePullPolicy: Always
+        envFrom:
+          - configMapRef:
+              name: app-config
+        env:
+          - name: CELERY_BROKER_URL
+            valueFrom:
+              configMapKeyRef:
+                name: app-config
+                key: CELERY_BROKER_URL
+        ports:
+          - containerPort: 5555
+            name: http
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: flower-cluster-ip-service
+spec:
+  type: NodePort
+  selector:
+    app: flower-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5555
+      nodePort: 31001

@@ -1,0 +1,46 @@
+name: build
+
+on:
+  workflow_call:
+  workflow_dispatch:
+  push:
+    branches: [master]
+
+env:
+  IMAGE_NAME: django-base
+
+jobs:
+  lint_django_job:
+    uses: arturgoms/django-base/.github/workflows/lint.yml@master
+  test_django_job:
+    uses: arturgoms/django-base/.github/workflows/tests.yml@master
+  format_django_job:
+    uses: arturgoms/django-base/.github/workflows/format.yml@master
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: [ test_django_job, lint_django_job, format_django_job ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: arturgoms
+          password: ${{ secrets.CR_PAT }}
+      - name: Build the django-base Docker image
+        run: |
+          docker build -t $IMAGE_NAME -f containers/web/Dockerfile .
+      - name: Push image to GitHub Container Registry
+        run: |
+          TAG=$(cat src/settings/base.py | grep VERSION | cut -d'=' -f 2 | cut -d'"' -f 2)
+          IMAGE_ID=ghcr.io/${{ github.repository_owner }}/$IMAGE_NAME
+
+          # Change all uppercase to lowercase
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+
+          docker tag $IMAGE_NAME $IMAGE_ID:$TAG
+          docker push $IMAGE_ID:$TAG
+          
+          docker tag $IMAGE_NAME $IMAGE_ID:latest
+          docker push $IMAGE_ID:latest
