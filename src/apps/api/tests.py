@@ -9,20 +9,20 @@ class AuthenticatedAPITestCase(APITestCase):
 
     def setUp(self) -> None:
         if self.auth_user_model:
-            # create a default user for tests.
+            # create a default panel_user for tests.
             self.user = self.mixer.blend(self.auth_user_model)
 
-            # define default authenticated user.
+            # define default authenticated panel_user.
             self.authenticated(self.user)
 
     def authenticated(self, user):
         """
         Set authentication header to request client.
         """
-        if isinstance(user, models.User):
+        if isinstance(user, models.PanelUser):
             role = UserRoleEnum.USER.value
 
-        # elif isinstance(user, models.Supplier):
+        # elif isinstance(panel_user, models.Supplier):
         #     role = UserRoleEnum.SUPPLIER.value
 
         else:
@@ -40,7 +40,7 @@ class AuthenticatedAPITestCase(APITestCase):
 
 class AuthenticatedUserAPITestCase(AuthenticatedAPITestCase):
     """
-    Use when the default authenticated user is a User.
+    Use when the default authenticated panel_user is a User.
     """
 
-    auth_user_model = models.User
+    auth_user_model = models.PanelUser

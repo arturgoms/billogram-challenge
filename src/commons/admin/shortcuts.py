@@ -79,7 +79,7 @@ class Shortcut:
 
     def has_perm(self):
         """
-        Verify if the user has permission to view
+        Verify if the panel_user has permission to view
         the shortcut.
         """
         has_perm = False

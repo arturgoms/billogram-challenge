@@ -4,7 +4,7 @@ from commons.api import auth
 
 class QueryAuthMiddleware:
     """
-    Custom middleware (insecure) that takes user IDs from the query string.
+    Custom middleware (insecure) that takes panel_user IDs from the query string.
     """
 
     def __init__(self, app):
@@ -14,8 +14,8 @@ class QueryAuthMiddleware:
     async def __call__(self, scope, receive, send):
         from django.contrib.auth.models import AnonymousUser
 
-        # Look up user from query string (you should also do things like
-        # checking if it is a valid user ID, or if scope["user"] is already
+        # Look up panel_user from query string (you should also do things like
+        # checking if it is a valid panel_user ID, or if scope["panel_user"] is already
         # populated).
         headers = {key.decode(): val.decode() for key, val in scope["headers"]}
 
@@ -23,14 +23,14 @@ class QueryAuthMiddleware:
 
         try:
             if not (claims := jwt.Jwt.verify(token=token, key=jwt.JWT_KEY)):
-                # deny if there is no user claims.
+                # deny if there is no panel_user claims.
                 return None
 
-            scope["user"] = auth.AuthenticatedUser(
+            scope["panel_user"] = auth.AuthenticatedUser(
                 pk=claims.get("id"), role=claims.get("role")
             )
 
         except (TypeError, ValueError):
-            scope["user"] = AnonymousUser()
+            scope["panel_user"] = AnonymousUser()
 
         return await self.app(scope, receive, send)

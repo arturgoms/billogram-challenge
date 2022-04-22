@@ -6,7 +6,7 @@ from rest_framework.permissions import BasePermission
 
 class IsAuthenticated(BasePermission):
     """
-    The request is authenticated as a user, or cors http verbs.
+    The request is authenticated as a panel_user, or cors http verbs.
     """
 
     def has_permission(self, request, view):

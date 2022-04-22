@@ -24,7 +24,7 @@ class BaseAuthenticationClient:
 
     def authenticate(self, request):
         """
-        Perform user authentication based on request.
+        Perform panel_user authentication based on request.
         """
         raise NotImplementedError()
 
@@ -40,7 +40,7 @@ class ClientAuthentication(authentication.BaseAuthentication):
     def authenticate(self, request):
         """
         Uses firebase client to authenticate a
-        user based on a request token.
+        panel_user based on a request token.
         """
         return self.client.authenticate(request)
 
@@ -55,7 +55,7 @@ class ClientAuthentication(authentication.BaseAuthentication):
 
 class AuthenticatedUser:
     """
-    Object to represent an authenticated user.
+    Object to represent an authenticated panel_user.
     """
 
     _db_representation_error = (

@@ -1,15 +1,15 @@
 from django.conf import settings
 
-from apps.domain.models import User
+from apps.domain.models import PanelUser
 
 
 class PermissionHelper:
     def __init__(self):
         self.permissions = getattr(settings, "ADMIN_PERMISSIONS", {})
 
-    def has_permission(self, user: User, context: str, action: str) -> bool:
+    def has_permission(self, user: PanelUser, context: str, action: str) -> bool:
         """
-        Check if user has permission of that action
+        Check if panel_user has permission of that action
         """
         if user.is_superuser:
             return True
@@ -27,9 +27,9 @@ class PermissionHelper:
 
         return False
 
-    def has_permissions(self, user: User, context: str, actions: list) -> bool:
+    def has_permissions(self, user: PanelUser, context: str, actions: list) -> bool:
         """
-        Check if user has the permissions in list
+        Check if panel_user has the permissions in list
         """
         if user.is_superuser:
             return True

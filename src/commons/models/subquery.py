@@ -29,5 +29,5 @@ class SubqueryCount(models.Subquery, metaclass=ABCMeta):
     def resolve_expression(self, *args, **kwargs):
         # As a performance optimization, remove ordering since COUNT doesn't
         # care about it, just whether or not a row matches.
-        self.query.clear_ordering(force_empty=True)
+        self.query.clear_ordering()
         return super().resolve_expression(*args, **kwargs)

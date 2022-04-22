@@ -3,7 +3,7 @@ import uuid
 
 class AuthenticatedUser:
     """
-    Object to represent an authenticated user.
+    Object to represent an authenticated panel_user.
     """
 
     _db_representation_error = (

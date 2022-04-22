@@ -5,7 +5,7 @@ from commons import jwt
 
 def generate_user_token(instance, exp=None):
     """
-    Generate the correct token for a user instance.
+    Generate the correct token for a panel_user instance.
 
     WARNING: This method was created just to development and test purpose,
         never call this in a production environment.
@@ -13,12 +13,12 @@ def generate_user_token(instance, exp=None):
     if isinstance(instance, models.User):
         role = UserRoleEnum.USER.value
 
-    # elif isinstance(instance, models.Supplier):
-    #     role = UserRoleEnum.SUPPLIER.value
+    elif isinstance(instance, models.Brand):
+        role = UserRoleEnum.BRAND.value
 
     else:
         raise TypeError(
-            "Instance must be 'domain.models.Client' or 'domain.models.Supplier' type."
+            "Instance must be 'domain.models.Brand' or 'domain.models.User' type."
         )
 
     return jwt.Jwt.generate(key=jwt.JWT_KEY, exp=exp, id=str(instance.pk), role=role)
