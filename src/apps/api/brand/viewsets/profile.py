@@ -1,20 +1,20 @@
 from django.shortcuts import get_object_or_404
 
 from apps.api import permissions
-from apps.api.brand.serializers.profile import BrandProfileSerializer, BrandChangeProfileSerializer
+from apps.api.brand.serializers.profile import BrandProfileSerializer
 from apps.domain import models
 from commons.api import viewsets, mixins
 
 
-class BrandProfileViewSet(mixins.UpdateModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class BrandProfileViewSet(
+    mixins.UpdateModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet
+):
     queryset = models.Brand.objects.all()
     serializer_class = BrandProfileSerializer
-    update_serializer_class = BrandChangeProfileSerializer
     permission_classes = [permissions.IsBrand]
 
     def get_queryset(self):
-        queryset = super().get_queryset() \
-            .include_discounts()
+        queryset = super().get_queryset()
         return queryset
 
     def get_object(self):

@@ -16,8 +16,10 @@ class DiscountListViewSet(FilterQuerysetMixin, viewsets.ListModelViewSet):
     permission_classes = [IsAuthenticated]
 
     filters = [
-        filters.Filter('ids', lookup='pk', cast=uuid.UUID, many=True),
-        filters.Filter('brand_website', lookup='brand__website', cast=str, many=True),
-        filters.Filter('brand', lookup='brand__name', cast=str, many=True),
-        Search(lookups=['description__icontains'])
+        filters.Filter("ids", lookup="pk", cast=uuid.UUID, many=True),
+        filters.Filter("website", lookup="brand__website", cast=str, many=True),
+        Search(lookups=["brand__name__icontains"]),
     ]
+
+    def get_queryset(self):
+        return super().get_queryset().filter(hide=False, enable=True)

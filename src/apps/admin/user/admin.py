@@ -50,8 +50,7 @@ class UserAdmin(PermissionsAdminMixin, SmartAdminMixin, admin.ModelAdmin):
     # }
 
     def get_queryset(self, request):
-        return super().get_queryset(request) \
-            .with_name()
+        return super().get_queryset(request).with_name()
 
     # Custom Field
 
@@ -62,21 +61,20 @@ class UserAdmin(PermissionsAdminMixin, SmartAdminMixin, admin.ModelAdmin):
         """
         return obj.full_name
 
-    @admin.display(description=_('Authentication Token'), empty_value='-')
+    @admin.display(description=_("Authentication Token"), empty_value="-")
     def authentication_token_field(self, obj):
         # INFO: Depends on authentication service.
         if not obj.pk:
-            return '-'
+            return "-"
 
         return render_to_string(
-            'admin/includes/copyable.html',
+            "admin/includes/copyable.html",
             context={
-                'content': generate_user_token(obj),
-                'field_id': 'webhook-url',
-                'help_text': mark_safe(_(
-                    'Use this token to authenticate in API.'
-                ))
-            })
+                "content": generate_user_token(obj),
+                "field_id": "webhook-url",
+                "help_text": mark_safe(_("Use this token to authenticate in API.")),
+            },
+        )
 
     # Permissions
 

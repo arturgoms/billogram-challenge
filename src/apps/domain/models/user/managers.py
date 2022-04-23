@@ -8,17 +8,23 @@ class UserQuerySet(models.QuerySet):
         Annotate ``name`` to queryset.
         """
         return self.annotate(
-            name=Concat("first_name", models.Value(" "), "last_name", output_field=models.CharField())
+            name=Concat(
+                "first_name",
+                models.Value(" "),
+                "last_name",
+                output_field=models.CharField(),
+            )
         )
 
     def include_discounts(self):
         from apps.domain.models import UserDiscount
 
-        user_discount_qs = UserDiscount.objects \
-            .select_related('discount')
+        user_discount_qs = UserDiscount.objects.select_related("discount")
 
         return self.prefetch_related(
-            models.Prefetch('user_discount', queryset=user_discount_qs, to_attr='discount')
+            models.Prefetch(
+                "user_discount", queryset=user_discount_qs, to_attr="discount"
+            )
         )
 
 

@@ -1,51 +1,288 @@
 {
-  "openapi": "3.0.3",
+  "openapi": "3.1.0",
   "info": {
-    "title": "Base Django API Specification",
-    "description": "Base Django API Specification",
-    "version": "1.0.0",
+    "title": "discount-api",
+    "version": "1.0",
+    "description": "API Specification for the discount service",
     "contact": {
-      "name": "Base Django",
-      "email": "contato@arturgomes.com.br",
-      "url": "www.arturgomes.com.br"
+      "name": "Artur Gomes"
     }
   },
   "servers": [
     {
-      "url": "//127.0.0.1:8000/api"
+      "url": "http://127.0.0.1:8000/api",
+      "description": "development"
     }
   ],
   "paths": {
-    "/health/": {
+    "/user/me/": {
+      "parameters": [],
       "get": {
-        "summary": "Check the health of the API",
+        "summary": "User Profile",
         "tags": [
+          "user",
+          "brand"
+        ],
+        "responses": {
+          "200": {
+            "description": "Profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "examples": {
+                  "Get User": {
+                    "value": {
+                      "id": "bb304c26-9e78-43ff-95fa-af83cc202712",
+                      "first_name": "Artur",
+                      "last_name": "Gomes",
+                      "email": "contato@aturgomes.com.br"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "detail": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "detail"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "detail": "Authentication credentials were not provided."
+                    }
+                  }
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "detail": "Authentication credentials were not provided."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-user-profile",
+        "description": "Retrieve the information of the logged user.",
+        "security": [
+          {
+            "jwt_key": []
+          }
+        ]
+      },
+      "put": {
+        "summary": "",
+        "operationId": "put-user-me",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "examples": {
+                  "Artur": {
+                    "value": {
+                      "id": "bb304c26-9e78-43ff-95fa-af83cc202712",
+                      "first_name": "Artur",
+                      "last_name": "Matos",
+                      "email": "contato@aturgomes.com.br"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Edit profile",
+        "tags": [
+          "user"
+        ],
+        "security": [
+          {
+            "jwt_key": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "first_name": "Artur",
+                    "last_name": "Matos"
+                  }
+                },
+                "properties": {
+                  "first_name": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "last_name": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              },
+              "examples": {
+                "Edit Last Name": {
+                  "value": {
+                    "first_name": "Artur",
+                    "last_name": "Rafaz"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/discounts/": {
+      "get": {
+        "summary": "List User Discounts",
+        "tags": [
+          "user"
         ],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BadRequest"
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "number"
+                    },
+                    "next": {},
+                    "previous": {},
+                    "results": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "discount": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "code": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "description": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "brand": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  },
+                                  "website": {
+                                    "type": "string",
+                                    "minLength": 1
+                                  }
+                                },
+                                "required": [
+                                  "id",
+                                  "name",
+                                  "website"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "code",
+                              "description",
+                              "brand"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "count",
+                    "results"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "count": 1,
+                      "next": null,
+                      "previous": null,
+                      "results": [
+                        {
+                          "id": "d66835b8-29c1-4e81-937e-e89638c283f4",
+                          "discount": {
+                            "id": "4ddcc39c-6da2-4a1b-9c3a-0a3cc555360b",
+                            "code": "HAPPY10",
+                            "description": "10% of discount",
+                            "brand": {
+                              "id": "ae7fe19b-ee96-494f-8ea6-2787217ef2fd",
+                              "name": "Udemy",
+                              "website": "udemy.com"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
                 },
                 "examples": {
-                  "example-1": {
+                  "One Discount Taken": {
                     "value": {
-                      "detail": "string",
-                      "errors": [
+                      "count": 1,
+                      "next": null,
+                      "previous": null,
+                      "results": [
                         {
-                          "field": "FIELD_NAME",
-                          "errors": [
-                            "ERROR_MESSAGE"
-                          ]
+                          "id": "d66835b8-29c1-4e81-937e-e89638c283f4",
+                          "discount": {
+                            "id": "4ddcc39c-6da2-4a1b-9c3a-0a3cc555360b",
+                            "code": "HAPPY10",
+                            "description": "10% of discount",
+                            "brand": {
+                              "id": "ae7fe19b-ee96-494f-8ea6-2787217ef2fd",
+                              "name": "Udemy",
+                              "website": "udemy.com"
+                            }
+                          }
                         }
                       ]
                     }
@@ -59,10 +296,25 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Unauthorized"
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "detail": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "detail"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "detail": "Authentication credentials were not provided."
+                    }
+                  }
                 },
                 "examples": {
-                  "example-1": {
+                  "Unauthorized": {
                     "value": {
                       "detail": "Authentication credentials were not provided."
                     }
@@ -72,105 +324,1192 @@
             }
           }
         },
-        "operationId": "get-api-health",
-        "description": "Check the health of the API"
+        "operationId": "get-users-discounts",
+        "description": "Return list of discounts taken by that user",
+        "security": [
+          {
+            "jwt_key": []
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/brand/me/": {
+      "get": {
+        "summary": "Brand Profile",
+        "tags": [
+          "brand"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Brand"
+                },
+                "examples": {
+                  "Udemy": {
+                    "value": {
+                      "id": "ae7fe19b-ee96-494f-8ea6-2787217ef2fd",
+                      "website": "udemy.com",
+                      "name": "Udemy",
+                      "email": "contact@udemy.com"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "detail": "Authentication credentials were not provided."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-brand-me",
+        "description": "Return the profile for that brand\n",
+        "security": [
+          {
+            "jwt_key": []
+          }
+        ]
+      },
+      "parameters": [],
+      "put": {
+        "summary": "",
+        "operationId": "put-brand-me",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "website": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "email": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "website",
+                    "name",
+                    "email"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "id": "ae7fe19b-ee96-494f-8ea6-2787217ef2fd",
+                      "website": "http://google.com",
+                      "name": "Google",
+                      "email": "contact@udemy.com"
+                    }
+                  }
+                },
+                "examples": {
+                  "Google": {
+                    "value": {
+                      "id": "ae7fe19b-ee96-494f-8ea6-2787217ef2fd",
+                      "website": "http://google.com",
+                      "name": "Google",
+                      "email": "contact@udemy.com"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Edit brand profile",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "name": "Google",
+                    "website": "http://google.com"
+                  }
+                },
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "website": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              },
+              "examples": {
+                "Change to google": {
+                  "value": {
+                    "name": "Google",
+                    "website": "http://google.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "brand"
+        ]
+      }
+    },
+    "/brand/discounts/": {
+      "get": {
+        "summary": "List Brand Discounts",
+        "tags": [
+          "brand"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "number"
+                    },
+                    "next": {},
+                    "previous": {},
+                    "results": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "required": [
+                          "id",
+                          "code",
+                          "description",
+                          "quantity",
+                          "balance",
+                          "hide",
+                          "enable"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "code": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "description": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "quantity": {
+                            "type": "number"
+                          },
+                          "balance": {
+                            "type": "number"
+                          },
+                          "hide": {
+                            "type": "boolean"
+                          },
+                          "enable": {
+                            "type": "boolean"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "count",
+                    "results"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "count": 2,
+                      "next": null,
+                      "previous": null,
+                      "results": [
+                        {
+                          "id": "98280366-7c94-4789-971e-0dc3513ebe91",
+                          "code": "EASTER20",
+                          "description": "20% of discount",
+                          "quantity": 50,
+                          "balance": 50,
+                          "hide": false,
+                          "enable": true
+                        },
+                        {
+                          "id": "4ddcc39c-6da2-4a1b-9c3a-0a3cc555360b",
+                          "code": "HAPPY10",
+                          "description": "10% of discount",
+                          "quantity": 20,
+                          "balance": 19,
+                          "hide": false,
+                          "enable": true
+                        }
+                      ]
+                    }
+                  }
+                },
+                "examples": {
+                  "List of 2 discounts": {
+                    "value": {
+                      "count": 2,
+                      "next": null,
+                      "previous": null,
+                      "results": [
+                        {
+                          "id": "98280366-7c94-4789-971e-0dc3513ebe91",
+                          "code": "EASTER20",
+                          "description": "20% of discount",
+                          "quantity": 50,
+                          "balance": 50,
+                          "hide": false,
+                          "enable": true
+                        },
+                        {
+                          "id": "4ddcc39c-6da2-4a1b-9c3a-0a3cc555360b",
+                          "code": "HAPPY10",
+                          "description": "10% of discount",
+                          "quantity": 20,
+                          "balance": 19,
+                          "hide": false,
+                          "enable": true
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-brand-discounts",
+        "description": "Return list of discounts generated by the logged brand",
+        "security": [
+          {
+            "jwt_key": []
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/brands/": {
+      "get": {
+        "summary": "List Brands",
+        "tags": [
+          "brand"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "number"
+                    },
+                    "next": {},
+                    "previous": {},
+                    "results": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "required": [
+                          "id",
+                          "name",
+                          "website"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "website": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "count",
+                    "results"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "count": 1,
+                      "next": null,
+                      "previous": null,
+                      "results": [
+                        {
+                          "id": "ae7fe19b-ee96-494f-8ea6-2787217ef2fd",
+                          "name": "Udemy",
+                          "website": "udemy.com"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "examples": {
+                  "List": {
+                    "value": {
+                      "count": 1,
+                      "next": null,
+                      "previous": null,
+                      "results": [
+                        {
+                          "id": "ae7fe19b-ee96-494f-8ea6-2787217ef2fd",
+                          "name": "Udemy",
+                          "website": "udemy.com"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-brands",
+        "description": "Return list of brands",
+        "security": [
+          {
+            "jwt_key": []
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/brand/discount/": {
+      "post": {
+        "summary": "Create Discount",
+        "operationId": "post-brand-discount",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "code": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "description": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "quantity": {
+                      "type": "number"
+                    },
+                    "hide": {
+                      "type": "boolean"
+                    },
+                    "enable": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "code",
+                    "description",
+                    "quantity",
+                    "hide",
+                    "enable"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "id": "a005204f-6445-40aa-b4c4-af29f13fc448",
+                      "code": "EASTER20",
+                      "description": "20% of discount",
+                      "quantity": 100,
+                      "hide": false,
+                      "enable": true
+                    }
+                  }
+                },
+                "examples": {
+                  "EASTER20": {
+                    "value": {
+                      "id": "a005204f-6445-40aa-b4c4-af29f13fc448",
+                      "code": "EASTER20",
+                      "description": "20% of discount",
+                      "quantity": 100,
+                      "hide": false,
+                      "enable": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Create Discount for the logged brand",
+        "security": [
+          {
+            "jwt_key": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "description": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "quantity": {
+                    "type": "number"
+                  },
+                  "hide": {
+                    "type": "boolean"
+                  },
+                  "enable": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "code",
+                  "description",
+                  "quantity",
+                  "hide",
+                  "enable"
+                ],
+                "x-examples": {
+                  "example-1": {
+                    "code": "EASTER20",
+                    "description": "20% of discount",
+                    "quantity": 100,
+                    "hide": false,
+                    "enable": true
+                  }
+                }
+              },
+              "examples": {
+                "EASTER20": {
+                  "value": {
+                    "code": "EASTER20",
+                    "description": "20% of discount",
+                    "quantity": 100,
+                    "hide": false,
+                    "enable": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "brand",
+          "discount"
+        ]
+      }
+    },
+    "/brand/discount/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Discount ID"
+        }
+      ],
+      "put": {
+        "summary": "Update Discount",
+        "operationId": "put-brand-discount-id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "code": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "description": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "quantity": {
+                      "type": "number"
+                    },
+                    "hide": {
+                      "type": "boolean"
+                    },
+                    "enable": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "code",
+                    "description",
+                    "quantity",
+                    "hide",
+                    "enable"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "id": "98280366-7c94-4789-971e-0dc3513ebe91",
+                      "code": "EASTER20",
+                      "description": "20% of discount",
+                      "quantity": 100,
+                      "hide": false,
+                      "enable": true
+                    }
+                  }
+                },
+                "examples": {
+                  "Discount": {
+                    "value": {
+                      "id": "98280366-7c94-4789-971e-0dc3513ebe91",
+                      "code": "EASTER20",
+                      "description": "20% of discount",
+                      "quantity": 100,
+                      "hide": false,
+                      "enable": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "brand",
+          "discount"
+        ],
+        "description": "Update Discount",
+        "security": [
+          {
+            "jwt_key": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "code": "EASTER20",
+                    "description": "20% of discount",
+                    "quantity": 100,
+                    "hide": false,
+                    "enable": true
+                  }
+                },
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "description": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "quantity": {
+                    "type": "number"
+                  },
+                  "hide": {
+                    "type": "boolean"
+                  },
+                  "enable": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "examples": {
+                "Update": {
+                  "value": {
+                    "code": "EASTER20",
+                    "description": "20% of discount",
+                    "quantity": 100,
+                    "hide": false,
+                    "enable": true
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        }
+      }
+    },
+    "/brand/discount/{id}/history": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "History of the Discount",
+        "tags": [
+          "brand",
+          "discount"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "number"
+                    },
+                    "next": {},
+                    "previous": {},
+                    "results": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "required": [
+                          "id"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "discount": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "code": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "description": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "quantity": {
+                                "type": "number"
+                              },
+                              "balance": {
+                                "type": "number"
+                              },
+                              "hide": {
+                                "type": "boolean"
+                              },
+                              "enable": {
+                                "type": "boolean"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "code",
+                              "description",
+                              "quantity",
+                              "balance",
+                              "hide",
+                              "enable"
+                            ]
+                          },
+                          "user": {
+                            "type": "object",
+                            "properties": {
+                              "first_name": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "email": {
+                                "type": "string",
+                                "minLength": 1
+                              }
+                            },
+                            "required": [
+                              "first_name",
+                              "email"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "count",
+                    "results"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "count": 1,
+                      "next": null,
+                      "previous": null,
+                      "results": [
+                        {
+                          "id": "d66835b8-29c1-4e81-937e-e89638c283f4",
+                          "discount": {
+                            "id": "4ddcc39c-6da2-4a1b-9c3a-0a3cc555360b",
+                            "code": "HAPPY10",
+                            "description": "10% of discount",
+                            "quantity": 20,
+                            "balance": 19,
+                            "hide": false,
+                            "enable": true
+                          },
+                          "user": {
+                            "first_name": "Artur",
+                            "email": "contato@aturgomes.com.br"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "examples": {
+                  "History": {
+                    "value": {
+                      "count": 1,
+                      "next": null,
+                      "previous": null,
+                      "results": [
+                        {
+                          "id": "d66835b8-29c1-4e81-937e-e89638c283f4",
+                          "discount": {
+                            "id": "4ddcc39c-6da2-4a1b-9c3a-0a3cc555360b",
+                            "code": "HAPPY10",
+                            "description": "10% of discount",
+                            "quantity": 20,
+                            "balance": 19,
+                            "hide": false,
+                            "enable": true
+                          },
+                          "user": {
+                            "first_name": "Artur",
+                            "email": "contato@aturgomes.com.br"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-brand-discount-id-history",
+        "description": "Get the lists of the users that take that discount",
+        "security": [
+          {
+            "jwt_key": []
+          }
+        ]
+      }
+    },
+    "/discount": {
+      "get": {
+        "summary": "List of Discounts",
+        "tags": [
+          "discount"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "number"
+                    },
+                    "next": {},
+                    "previous": {},
+                    "results": {
+                      "type": "array",
+                      "uniqueItems": true,
+                      "minItems": 1,
+                      "items": {
+                        "required": [
+                          "id",
+                          "description"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "brand": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "website": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "name": {
+                                "type": "string",
+                                "minLength": 1
+                              },
+                              "email": {
+                                "type": "string",
+                                "minLength": 1
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "website",
+                              "name",
+                              "email"
+                            ]
+                          },
+                          "description": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "count",
+                    "results"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "count": 2,
+                      "next": null,
+                      "previous": null,
+                      "results": [
+                        {
+                          "id": "98280366-7c94-4789-971e-0dc3513ebe91",
+                          "brand": {
+                            "id": "ae7fe19b-ee96-494f-8ea6-2787217ef2fd",
+                            "website": "udemy.com",
+                            "name": "Udemy",
+                            "email": "contact@udemy.com"
+                          },
+                          "description": "20% of discount"
+                        },
+                        {
+                          "id": "4ddcc39c-6da2-4a1b-9c3a-0a3cc555360b",
+                          "brand": {
+                            "id": "ae7fe19b-ee96-494f-8ea6-2787217ef2fd",
+                            "website": "udemy.com",
+                            "name": "Udemy",
+                            "email": "contact@udemy.com"
+                          },
+                          "description": "10% of discount"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "examples": {
+                  "List": {
+                    "value": {
+                      "count": 2,
+                      "next": null,
+                      "previous": null,
+                      "results": [
+                        {
+                          "id": "98280366-7c94-4789-971e-0dc3513ebe91",
+                          "brand": {
+                            "id": "ae7fe19b-ee96-494f-8ea6-2787217ef2fd",
+                            "website": "udemy.com",
+                            "name": "Udemy",
+                            "email": "contact@udemy.com"
+                          },
+                          "description": "20% of discount"
+                        },
+                        {
+                          "id": "4ddcc39c-6da2-4a1b-9c3a-0a3cc555360b",
+                          "brand": {
+                            "id": "ae7fe19b-ee96-494f-8ea6-2787217ef2fd",
+                            "website": "udemy.com",
+                            "name": "Udemy",
+                            "email": "contact@udemy.com"
+                          },
+                          "description": "10% of discount"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-discount",
+        "description": "Get a list of available discounts",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "search",
+            "description": "Query search by name of brand"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "website",
+            "description": "Search by website"
+          }
+        ]
+      }
+    },
+    "/discount/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get the Discount",
+        "tags": [
+          "discount",
+          "user"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "code": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "description": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "code",
+                    "description"
+                  ],
+                  "x-examples": {
+                    "example-1": {
+                      "id": "98280366-7c94-4789-971e-0dc3513ebe91",
+                      "code": "EASTER20",
+                      "description": "20% of discount"
+                    }
+                  }
+                },
+                "examples": {
+                  "Discount": {
+                    "value": {
+                      "id": "98280366-7c94-4789-971e-0dc3513ebe91",
+                      "code": "EASTER20",
+                      "description": "20% of discount"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-discount-id",
+        "security": [
+          {
+            "jwt_key": []
+          }
+        ],
+        "description": "Get the discount by a logged user"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "title": "User",
+        "type": "object",
+        "description": "",
+        "examples": [
+          {
+            "id": "bb304c26-9e78-43ff-95fa-af83cc202712",
+            "first_name": "Artur",
+            "last_name": "Matos",
+            "email": "contato@aturgomes.com.br"
+          }
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique identifier for the given user."
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          }
+        },
+        "required": [
+          "id",
+          "first_name",
+          "last_name",
+          "email"
+        ]
+      },
+      "Brand": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "website": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "email": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "website",
+          "name",
+          "email"
+        ],
+        "x-examples": {
+          "example-1": {
+            "id": "ae7fe19b-ee96-494f-8ea6-2787217ef2fd",
+            "website": "udemy.com",
+            "name": "Udemy",
+            "email": "contact@udemy.com"
+          }
+        },
+        "examples": [
+          {
+            "id": "ae7fe19b-ee96-494f-8ea6-2787217ef2fd",
+            "website": "udemy.com",
+            "name": "Udemy",
+            "email": "contact@udemy.com"
+          }
+        ]
+      }
+    },
+    "securitySchemes": {
+      "jwt_key": {
+        "name": "Authorization",
+        "type": "apiKey",
+        "in": "header"
       }
     }
   },
   "tags": [
-  ],
-  "components": {
-    "securitySchemes": {
-      "BearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
-      },
-      "PublicAuth": {
-        "type": "http",
-        "scheme": "public"
-      }
+    {
+      "name": "brand"
     },
-    "schemas": {
-      "BadRequest": {
-        "type": "object",
-        "properties": {
-          "detail": {
-            "type": "string"
-          },
-          "errors": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "field": {
-                  "type": "string",
-                  "example": "FIELD_NAME"
-                },
-                "errors": {
-                  "type": "array",
-                  "items": {
-                    "type": "string",
-                    "example": "ERROR_MESSAGE"
-                  }
-                }
-              },
-              "required": [
-                "field",
-                "errors"
-              ],
-              "additionalProperties": false
-            },
-            "required": [
-              "detail",
-              "errors"
-            ],
-            "additionalProperties": false
-          }
-        },
-        "required": [
-          "field_name"
-        ],
-        "additionalProperties": false
-      },
-      "Forbidden": {
-        "type": "object",
-        "properties": {
-          "detail": {
-            "type": "string",
-            "example": "Forbidden."
-          }
-        },
-        "required": [
-          "message"
-        ],
-        "additionalProperties": false
-      },
-      "NotFound": {
-        "type": "object",
-        "properties": {
-          "detail": {
-            "type": "string",
-            "example": "Not Found."
-          }
-        },
-        "required": [
-          "message"
-        ],
-        "additionalProperties": false
-      },
-      "Unauthorized": {
-        "type": "object",
-        "properties": {
-          "detail": {
-            "type": "string",
-            "example": "Authentication credentials were not provided."
-          }
-        },
-        "required": [
-          "message"
-        ],
-        "additionalProperties": false
-      }
+    {
+      "name": "discount"
+    },
+    {
+      "name": "user"
     }
-  }
+  ]
 }

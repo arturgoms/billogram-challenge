@@ -33,21 +33,20 @@ class BrandAdmin(PermissionsAdminMixin, SmartAdminMixin, admin.ModelAdmin):
 
     # Custom Field
 
-    @admin.display(description=_('Authentication Token'), empty_value='-')
+    @admin.display(description=_("Authentication Token"), empty_value="-")
     def authentication_token_field(self, obj):
         # INFO: Depends on authentication service.
         if not obj.pk:
-            return '-'
+            return "-"
 
         return render_to_string(
-            'admin/includes/copyable.html',
+            "admin/includes/copyable.html",
             context={
-                'content': generate_user_token(obj),
-                'field_id': 'webhook-url',
-                'help_text': mark_safe(_(
-                    'Use this token to authenticate in API.'
-                ))
-            })
+                "content": generate_user_token(obj),
+                "field_id": "webhook-url",
+                "help_text": mark_safe(_("Use this token to authenticate in API.")),
+            },
+        )
 
     # Permissions
 
