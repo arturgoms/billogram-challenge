@@ -1,10 +1,8 @@
 from django.db import models
-from django.db.models import Count
 from django.utils.translation import gettext_lazy as _
 
 from apps.domain.models.discount.managers import DiscountManager
 from commons.models.base import Model
-from commons.models.subquery import SubqueryCount
 
 
 class Discount(Model):
@@ -17,6 +15,12 @@ class Discount(Model):
         _('Quantity'), help_text=_(
             'Total that can be used'
         ))
+
+    hide = models.BooleanField(
+        _('Hide'), default=False)
+
+    enable = models.BooleanField(
+        _('Enable'), default=True)
 
     brand = models.ForeignKey(
         'domain.Brand',

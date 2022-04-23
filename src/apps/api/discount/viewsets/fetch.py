@@ -18,6 +18,9 @@ class DiscountFetchViewSet(RetrieveModelMixin, viewsets.GenericViewSet):
         if models.UserDiscount.objects.filter(user_id=request.user.pk, discount_id=self.kwargs.get('pk')).exists():
             return Response({"error": "User already get that discount"}, status=status.HTTP_400_BAD_REQUEST)
 
+        # TODO: check if the balance is greater then 0
+        # TODO: check if discount is enabled
+
         models.UserDiscount.objects.create(
             discount_id=self.kwargs.get('pk'),
             user_id=request.user.pk)
