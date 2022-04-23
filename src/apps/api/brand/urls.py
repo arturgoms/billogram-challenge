@@ -17,8 +17,20 @@ profile_router.register("", BrandProfileViewSet, basename="brand-profile")
 
 urlpatterns = [
     path("me/", include(profile_router.urls)),
-    path("discount/<uuid:pk>/", BrandDiscountUpdateViewSet.as_view(actions={"put": "partial_update"}), name="brand-discount"),
-    path("discount/<uuid:pk>/history", BrandDiscountHistoryViewSet.as_view(actions={"get": "list"}), name="brand-discount"),
-    path("discount/", CreateDiscountViewSet.as_view(actions={"post": "create"}), name="brand-discount"),
+    path(
+        "discount/<uuid:pk>/",
+        BrandDiscountUpdateViewSet.as_view(actions={"put": "partial_update"}),
+        name="brand-discount",
+    ),
+    path(
+        "discount/<uuid:pk>/history",
+        BrandDiscountHistoryViewSet.as_view(actions={"get": "list"}),
+        name="brand-discount",
+    ),
+    path(
+        "discount/",
+        CreateDiscountViewSet.as_view(actions={"post": "create"}),
+        name="brand-discount",
+    ),
     path("", include(router.urls)),
 ]

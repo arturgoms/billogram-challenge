@@ -6,7 +6,9 @@ from apps.domain import models
 from commons.api import viewsets, mixins
 
 
-class BrandProfileViewSet(mixins.UpdateModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class BrandProfileViewSet(
+    mixins.UpdateModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet
+):
     queryset = models.Brand.objects.all()
     serializer_class = BrandProfileSerializer
     permission_classes = [permissions.IsBrand]

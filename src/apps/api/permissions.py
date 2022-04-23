@@ -72,5 +72,4 @@ class IsUserOrBrand(BaseRolePermission):
     """
 
     def has_role_permission(self, request):
-        return UserRoleEnum.is_brand(request.user) or \
-            UserRoleEnum.is_user(request.user)
+        return UserRoleEnum.is_brand(request.user) or UserRoleEnum.is_user(request.user)

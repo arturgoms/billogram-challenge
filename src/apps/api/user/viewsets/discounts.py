@@ -12,10 +12,7 @@ class UserDiscountViewSet(FilterQuerysetMixin, viewsets.ListModelViewSet):
     serializer_class = DiscountsSerializer
     permission_classes = [permissions.IsUser]
 
-    filters = [
-        Filter('ids', lookup='pk', cast=uuid.UUID, many=True)
-    ]
+    filters = [Filter("ids", lookup="pk", cast=uuid.UUID, many=True)]
 
     def get_queryset(self):
-        return super().get_queryset() \
-            .filter(user_id=self.request.user.pk)
+        return super().get_queryset().filter(user_id=self.request.user.pk)

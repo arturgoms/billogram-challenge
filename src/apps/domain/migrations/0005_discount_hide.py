@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('domain', '0004_remove_discount_balance_alter_discount_brand_and_more'),
+        ("domain", "0004_remove_discount_balance_alter_discount_brand_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='discount',
-            name='hide',
-            field=models.BooleanField(default=False, verbose_name='hide'),
+            model_name="discount",
+            name="hide",
+            field=models.BooleanField(default=False, verbose_name="hide"),
         ),
     ]

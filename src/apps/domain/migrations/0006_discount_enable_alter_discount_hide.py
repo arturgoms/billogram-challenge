@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('domain', '0005_discount_hide'),
+        ("domain", "0005_discount_hide"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='discount',
-            name='enable',
-            field=models.BooleanField(default=True, verbose_name='Enable'),
+            model_name="discount",
+            name="enable",
+            field=models.BooleanField(default=True, verbose_name="Enable"),
         ),
         migrations.AlterField(
-            model_name='discount',
-            name='hide',
-            field=models.BooleanField(default=False, verbose_name='Hide'),
+            model_name="discount",
+            name="hide",
+            field=models.BooleanField(default=False, verbose_name="Hide"),
         ),
     ]

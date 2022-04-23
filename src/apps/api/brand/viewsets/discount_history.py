@@ -12,10 +12,7 @@ class BrandDiscountHistoryViewSet(FilterQuerysetMixin, viewsets.ListModelViewSet
     serializer_class = DiscountsHistorySerializer
     permission_classes = [permissions.IsBrand]
 
-    filters = [
-        Filter('ids', lookup='pk', cast=uuid.UUID, many=True)
-    ]
+    filters = [Filter("ids", lookup="pk", cast=uuid.UUID, many=True)]
 
     def get_queryset(self):
-        return super().get_queryset() \
-            .filter(discount_id=self.kwargs.get('pk'))
+        return super().get_queryset().filter(discount_id=self.kwargs.get("pk"))

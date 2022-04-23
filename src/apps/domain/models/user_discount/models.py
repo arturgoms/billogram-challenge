@@ -6,16 +6,18 @@ from apps.domain.models.user_discount.managers import UserDiscountManager
 
 class UserDiscount(Model):
     user = models.ForeignKey(
-        'domain.User',
-        verbose_name=_('User'),
-        related_name='user_discount',
-        on_delete=models.CASCADE)
+        "domain.User",
+        verbose_name=_("User"),
+        related_name="user_discount",
+        on_delete=models.CASCADE,
+    )
 
     discount = models.ForeignKey(
-        'domain.Discount',
-        verbose_name=_('Discount'),
-        related_name='user_discount',
-        on_delete=models.CASCADE)
+        "domain.Discount",
+        verbose_name=_("Discount"),
+        related_name="user_discount",
+        on_delete=models.CASCADE,
+    )
 
     objects = UserDiscountManager()
 

@@ -18,25 +18,16 @@ class DiscountAdmin(PermissionsAdminMixin, SmartAdminMixin, admin.ModelAdmin):
     fieldsets = (
         (
             None,
-            {
-                "fields": [
-                    "code",
-                    "description",
-                    "brand"
-                ]
-            },
+            {"fields": ["code", "description", "brand"]},
         ),
-        (_("Data"), {"fields": ["quantity", "balance_field"]})
+        (_("Data"), {"fields": ["quantity", "balance_field"]}),
     )
 
-    readonly_fields = [
-        "balance_field"
-    ]
+    readonly_fields = ["balance_field"]
     autocomplete_fields = ["brand"]
 
     def get_queryset(self, request):
-        return super().get_queryset(request) \
-            .with_used()
+        return super().get_queryset(request).with_used()
 
     # Custom Field
 

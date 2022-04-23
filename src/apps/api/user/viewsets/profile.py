@@ -6,7 +6,9 @@ from apps.domain import models
 from commons.api import viewsets, mixins
 
 
-class UserProfileViewSet(mixins.UpdateModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class UserProfileViewSet(
+    mixins.UpdateModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet
+):
     queryset = models.User.objects.all()
     serializer_class = UserProfileSerializer
     permission_classes = [permissions.IsUser]

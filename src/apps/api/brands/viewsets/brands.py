@@ -14,9 +14,9 @@ class BrandsListViewSet(FilterQuerysetMixin, viewsets.ListModelViewSet):
     permission_classes = [permissions.IsUser]
 
     filters = [
-        filters.Filter('ids', lookup='pk', cast=uuid.UUID, many=True),
-        filters.Filter('website', lookup='website', cast=str, many=True),
-        Search(lookups=['name__icontains'])
+        filters.Filter("ids", lookup="pk", cast=uuid.UUID, many=True),
+        filters.Filter("website", lookup="website", cast=str, many=True),
+        Search(lookups=["name__icontains"]),
     ]
 
     def get_queryset(self):

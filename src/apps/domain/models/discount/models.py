@@ -12,21 +12,19 @@ class Discount(Model):
     description = models.CharField(_("Description"), max_length=60)
 
     quantity = models.PositiveIntegerField(
-        _('Quantity'), help_text=_(
-            'Total that can be used'
-        ))
+        _("Quantity"), help_text=_("Total that can be used")
+    )
 
-    hide = models.BooleanField(
-        _('Hide'), default=False)
+    hide = models.BooleanField(_("Hide"), default=False)
 
-    enable = models.BooleanField(
-        _('Enable'), default=True)
+    enable = models.BooleanField(_("Enable"), default=True)
 
     brand = models.ForeignKey(
-        'domain.Brand',
-        verbose_name=_('Brand'),
-        related_name='brand_discount',
-        on_delete=models.CASCADE)
+        "domain.Brand",
+        verbose_name=_("Brand"),
+        related_name="brand_discount",
+        on_delete=models.CASCADE,
+    )
 
     objects = DiscountManager()
 
@@ -38,5 +36,3 @@ class Discount(Model):
 
     def __str__(self):
         return self.code
-
-

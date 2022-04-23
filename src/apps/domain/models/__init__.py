@@ -19,7 +19,7 @@ CharField.register_lookup(RemovePunctuation)
 @receiver(post_migrate)
 def enable_unaccent_postgres_extension(sender, *args, **kwargs):
     """
-        Unable unccent in database
+    Unable unccent in database
     """
     db = Database()
     db.execute("CREATE EXTENSION IF NOT EXISTS unaccent;")

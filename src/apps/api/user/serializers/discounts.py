@@ -5,7 +5,7 @@ from commons.api.serializers import PartialModelSerializer
 class BrandSerializer(PartialModelSerializer):
     class Meta:
         model = models.Brand
-        fields = ['id', 'name', 'website']
+        fields = ["id", "name", "website"]
 
 
 class DiscountSerializer(PartialModelSerializer):
@@ -13,7 +13,7 @@ class DiscountSerializer(PartialModelSerializer):
 
     class Meta:
         model = models.Discount
-        fields = ['id', 'code', 'description', 'brand']
+        fields = ["id", "code", "description", "brand"]
 
 
 class DiscountsSerializer(PartialModelSerializer):
@@ -21,4 +21,4 @@ class DiscountsSerializer(PartialModelSerializer):
 
     class Meta:
         model = models.UserDiscount
-        fields = ['id', 'discount']
+        fields = ["id", "discount"]
