@@ -22,13 +22,16 @@ class BrandDiscountCreateApiTestCase(AuthenticatedBrandAPITestCase):
         brand = self.mixer.blend(models.Brand)
         self.authenticated(brand)
 
-        response = self.client.post(reverse('api:brand-discount-create'), data={
-            "code": self.faker.name(),
-            "description": self.faker.name(),
-            "quantity": 100,
-            "hide": True,
-            "enable": False
-        })
+        response = self.client.post(
+            reverse("api:brand-discount-create"),
+            data={
+                "code": self.faker.name(),
+                "description": self.faker.name(),
+                "quantity": 100,
+                "hide": True,
+                "enable": False,
+            },
+        )
 
         self.assertEqual(status.HTTP_201_CREATED, response.status_code)
 
@@ -42,12 +45,12 @@ class BrandDiscountCreateApiTestCase(AuthenticatedBrandAPITestCase):
         # Set user token.
         self.authenticated(user)
 
-        response = self.client.post(reverse('api:brand-discount-create'))
+        response = self.client.post(reverse("api:brand-discount-create"))
         self.assertEqual(status.HTTP_403_FORBIDDEN, response.status_code)
 
     def test_should_not_create_if_not_authenticated(self):
         # clear authorization header
         self.unauthenticated()
 
-        response = self.client.get(reverse('api:brand-discount-create'))
+        response = self.client.get(reverse("api:brand-discount-create"))
         self.assertEqual(status.HTTP_401_UNAUTHORIZED, response.status_code)

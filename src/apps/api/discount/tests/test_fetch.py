@@ -21,7 +21,7 @@ class UserDiscountFetchApiTestCase(AuthenticatedBrandAPITestCase):
 
         discount = self.mixer.blend(models.Discount)
 
-        response = self.client.get(reverse('api:discount-fetch', args=[discount.pk]))
+        response = self.client.get(reverse("api:discount-fetch", args=[discount.pk]))
         self.assertEqual(status.HTTP_201_CREATED, response.status_code)
 
         data = response.json()
@@ -32,7 +32,7 @@ class UserDiscountFetchApiTestCase(AuthenticatedBrandAPITestCase):
         # clear authorization header
         self.unauthenticated()
 
-        response = self.client.get(reverse('api:discount-fetch', args=[uuid.uuid4()]))
+        response = self.client.get(reverse("api:discount-fetch", args=[uuid.uuid4()]))
         self.assertEqual(status.HTTP_401_UNAUTHORIZED, response.status_code)
 
     def test_should_not_fetch_if_already_taken(self):
@@ -41,10 +41,10 @@ class UserDiscountFetchApiTestCase(AuthenticatedBrandAPITestCase):
 
         discount = self.mixer.blend(models.Discount)
 
-        response = self.client.get(reverse('api:discount-fetch', args=[discount.pk]))
+        response = self.client.get(reverse("api:discount-fetch", args=[discount.pk]))
         self.assertEqual(status.HTTP_201_CREATED, response.status_code)
 
-        response = self.client.get(reverse('api:discount-fetch', args=[discount.pk]))
+        response = self.client.get(reverse("api:discount-fetch", args=[discount.pk]))
         self.assertEqual(status.HTTP_400_BAD_REQUEST, response.status_code)
 
     def test_should_not_fetch_if_balance_is_zero(self):
@@ -55,7 +55,7 @@ class UserDiscountFetchApiTestCase(AuthenticatedBrandAPITestCase):
         discount = self.mixer.blend(models.Discount, quantity=1)
         self.mixer.blend(models.UserDiscount, user=user2, discount=discount)
 
-        response = self.client.get(reverse('api:discount-fetch', args=[discount.pk]))
+        response = self.client.get(reverse("api:discount-fetch", args=[discount.pk]))
         self.assertEqual(status.HTTP_406_NOT_ACCEPTABLE, response.status_code)
 
     def test_should_not_fetch_if_discount_is_disabled(self):
@@ -64,6 +64,5 @@ class UserDiscountFetchApiTestCase(AuthenticatedBrandAPITestCase):
 
         discount = self.mixer.blend(models.Discount, enable=False)
 
-        response = self.client.get(reverse('api:discount-fetch', args=[discount.pk]))
+        response = self.client.get(reverse("api:discount-fetch", args=[discount.pk]))
         self.assertEqual(status.HTTP_406_NOT_ACCEPTABLE, response.status_code)
-

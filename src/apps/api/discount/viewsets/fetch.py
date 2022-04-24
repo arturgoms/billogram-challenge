@@ -23,7 +23,7 @@ class DiscountFetchViewSet(RetrieveModelMixin, viewsets.GenericViewSet):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        discount = models.Discount.objects.get(pk=self.kwargs.get('pk'))
+        discount = models.Discount.objects.get(pk=self.kwargs.get("pk"))
         if not discount.enable:
             return Response(
                 {"error": "This discount is disable, sorry."},

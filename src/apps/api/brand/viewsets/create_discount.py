@@ -22,7 +22,7 @@ class CreateDiscountViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
             quantity=serializer.validated_data["quantity"],
             hide=serializer.validated_data["hide"],
             enable=serializer.validated_data["enable"],
-            brand_id=self.request.user.pk
+            brand_id=self.request.user.pk,
         )
 
         serializer = self.get_serializer(

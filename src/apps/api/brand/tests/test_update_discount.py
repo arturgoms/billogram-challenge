@@ -24,13 +24,16 @@ class BrandDiscountUpdateApiTestCase(AuthenticatedBrandAPITestCase):
 
         discount = self.mixer.blend(models.Discount, brand=brand)
 
-        response = self.client.put(reverse('api:brand-discount-update', args=[discount.pk]), data={
-            "code": self.faker.name(),
-            "description": self.faker.name(),
-            "quantity": 100,
-            "hide": True,
-            "enable": False
-        })
+        response = self.client.put(
+            reverse("api:brand-discount-update", args=[discount.pk]),
+            data={
+                "code": self.faker.name(),
+                "description": self.faker.name(),
+                "quantity": 100,
+                "hide": True,
+                "enable": False,
+            },
+        )
 
         self.assertEqual(status.HTTP_200_OK, response.status_code)
 
@@ -45,10 +48,13 @@ class BrandDiscountUpdateApiTestCase(AuthenticatedBrandAPITestCase):
         new_website = self.faker.url()
         new_name = self.faker.name()
 
-        response = self.client.put(reverse('api:brand-discount-update', args=[uuid.uuid4()]), data={
-            'website': new_website,
-            'name': new_name,
-        })
+        response = self.client.put(
+            reverse("api:brand-discount-update", args=[uuid.uuid4()]),
+            data={
+                "website": new_website,
+                "name": new_name,
+            },
+        )
 
         self.assertEqual(status.HTTP_403_FORBIDDEN, response.status_code)
 
@@ -58,9 +64,12 @@ class BrandDiscountUpdateApiTestCase(AuthenticatedBrandAPITestCase):
 
         new_website = self.faker.url()
         new_name = self.faker.name()
-        response = self.client.put(reverse('api:brand-discount-update', args=[uuid.uuid4()]), data={
-            'website': new_website,
-            'name': new_name,
-        })
+        response = self.client.put(
+            reverse("api:brand-discount-update", args=[uuid.uuid4()]),
+            data={
+                "website": new_website,
+                "name": new_name,
+            },
+        )
 
         self.assertEqual(status.HTTP_401_UNAUTHORIZED, response.status_code)

@@ -23,7 +23,7 @@ class BrandDiscountListApiTestCase(AuthenticatedBrandAPITestCase):
 
         self.mixer.blend(models.Discount, brand=brand)
 
-        response = self.client.get(reverse('api:brand-discount-list'))
+        response = self.client.get(reverse("api:brand-discount-list"))
         self.assertEqual(status.HTTP_200_OK, response.status_code)
 
         data = response.json()
@@ -36,12 +36,12 @@ class BrandDiscountListApiTestCase(AuthenticatedBrandAPITestCase):
         # Set user token.
         self.authenticated(user)
 
-        response = self.client.get(reverse('api:brand-discount-list'))
+        response = self.client.get(reverse("api:brand-discount-list"))
         self.assertEqual(status.HTTP_403_FORBIDDEN, response.status_code)
 
     def test_should_not_list_if_not_authenticated(self):
         # clear authorization header
         self.unauthenticated()
 
-        response = self.client.get(reverse('api:brand-discount-list'))
+        response = self.client.get(reverse("api:brand-discount-list"))
         self.assertEqual(status.HTTP_401_UNAUTHORIZED, response.status_code)

@@ -14,11 +14,10 @@ class ProfileSchema(json_schema.JsonSchema):
 
 
 class UserProfileApiTestCase(AuthenticatedUserAPITestCase):
-
     def test_should_retrieve(self):
         user = self.mixer.blend(models.User)
         self.authenticated(user)
-        response = self.client.get(reverse('api:user-profile'))
+        response = self.client.get(reverse("api:user-profile"))
         self.assertEqual(status.HTTP_200_OK, response.status_code)
         self.assertSchema(ProfileSchema, response.json())
 
@@ -28,17 +27,20 @@ class UserProfileApiTestCase(AuthenticatedUserAPITestCase):
 
         new_name = self.faker.name()
         new_name_last = self.faker.name()
-        response = self.client.put(reverse('api:user-profile'), data={
-            'first_name': new_name,
-            'last_name': new_name_last,
-        })
+        response = self.client.put(
+            reverse("api:user-profile"),
+            data={
+                "first_name": new_name,
+                "last_name": new_name_last,
+            },
+        )
 
         self.assertEqual(status.HTTP_200_OK, response.status_code)
 
         data = response.json()
 
-        self.assertEqual(data['first_name'], new_name)
-        self.assertEqual(data['last_name'], new_name_last)
+        self.assertEqual(data["first_name"], new_name)
+        self.assertEqual(data["last_name"], new_name_last)
         self.assertSchema(ProfileSchema, data)
 
     def test_should_not_update_if_is_brand(self):
@@ -47,10 +49,13 @@ class UserProfileApiTestCase(AuthenticatedUserAPITestCase):
 
         new_name = self.faker.name()
         new_name_last = self.faker.name()
-        response = self.client.put(reverse('api:user-profile'), data={
-            'first_name': new_name,
-            'last_name': new_name_last,
-        })
+        response = self.client.put(
+            reverse("api:user-profile"),
+            data={
+                "first_name": new_name,
+                "last_name": new_name_last,
+            },
+        )
 
         self.assertEqual(status.HTTP_403_FORBIDDEN, response.status_code)
 
@@ -60,10 +65,13 @@ class UserProfileApiTestCase(AuthenticatedUserAPITestCase):
 
         new_name = self.faker.name()
         new_name_last = self.faker.name()
-        response = self.client.put(reverse('api:user-profile'), data={
-            'first_name': new_name,
-            'last_name': new_name_last,
-        })
+        response = self.client.put(
+            reverse("api:user-profile"),
+            data={
+                "first_name": new_name,
+                "last_name": new_name_last,
+            },
+        )
 
         self.assertEqual(status.HTTP_401_UNAUTHORIZED, response.status_code)
 
@@ -73,12 +81,12 @@ class UserProfileApiTestCase(AuthenticatedUserAPITestCase):
         # set authentication header
         self.authenticated(brand)
 
-        response = self.client.get(reverse('api:user-profile'))
+        response = self.client.get(reverse("api:user-profile"))
         self.assertEqual(status.HTTP_403_FORBIDDEN, response.status_code)
 
     def test_should_not_retrieve_if_not_authenticated(self):
         # clear authorization header
         self.unauthenticated()
 
-        response = self.client.get(reverse('api:user-profile'))
+        response = self.client.get(reverse("api:user-profile"))
         self.assertEqual(status.HTTP_401_UNAUTHORIZED, response.status_code)

@@ -19,7 +19,7 @@ class BrandsListApiTestCase(AuthenticatedUserAPITestCase):
 
         self.mixer.cycle(10).blend(models.Brand)
 
-        response = self.client.get(reverse('api:brands-list'))
+        response = self.client.get(reverse("api:brands-list"))
         self.assertEqual(status.HTTP_200_OK, response.status_code)
 
         data = response.json()
@@ -30,5 +30,5 @@ class BrandsListApiTestCase(AuthenticatedUserAPITestCase):
         # clear authorization header
         self.unauthenticated()
 
-        response = self.client.get(reverse('api:brands-list'))
+        response = self.client.get(reverse("api:brands-list"))
         self.assertEqual(status.HTTP_401_UNAUTHORIZED, response.status_code)
