@@ -15,7 +15,6 @@ class DiscountFetchViewSet(RetrieveModelMixin, viewsets.GenericViewSet):
 
     def fetch(self, request, *args, **kwargs):
 
-        # Check if user already fetch the discount
         if models.UserDiscount.objects.filter(
             user_id=request.user.pk, discount_id=self.kwargs.get("pk")
         ).exists():
