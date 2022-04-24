@@ -20,17 +20,17 @@ urlpatterns = [
     path(
         "discount/<uuid:pk>/",
         BrandDiscountUpdateViewSet.as_view(actions={"put": "partial_update"}),
-        name="brand-discount",
+        name="brand-discount-update",
     ),
     path(
         "discount/<uuid:pk>/history",
         BrandDiscountHistoryViewSet.as_view(actions={"get": "list"}),
-        name="brand-discount",
+        name="brand-discount-history",
     ),
     path(
         "discount/",
         CreateDiscountViewSet.as_view(actions={"post": "create"}),
-        name="brand-discount",
+        name="brand-discount-create",
     ),
     path("", include(router.urls)),
 ]

@@ -19,11 +19,11 @@ class AuthenticatedAPITestCase(APITestCase):
         """
         Set authentication header to request client.
         """
-        if isinstance(user, models.PanelUser):
+        if isinstance(user, models.User):
             role = UserRoleEnum.USER.value
 
-        # elif isinstance(panel_user, models.Supplier):
-        #     role = UserRoleEnum.SUPPLIER.value
+        elif isinstance(user, models.Brand):
+            role = UserRoleEnum.BRAND.value
 
         else:
             raise TypeError("Instance must be 'domain.models.User' type.")
@@ -43,4 +43,12 @@ class AuthenticatedUserAPITestCase(AuthenticatedAPITestCase):
     Use when the default authenticated panel_user is a User.
     """
 
-    auth_user_model = models.PanelUser
+    auth_user_model = models.User
+
+
+class AuthenticatedBrandAPITestCase(AuthenticatedAPITestCase):
+    """
+    Use when the default authenticated panel_user is a Brand.
+    """
+
+    auth_user_model = models.User

@@ -7,7 +7,7 @@ from rest_framework import routers
 
 
 router = routers.DefaultRouter()
-router.register("discounts", UserDiscountViewSet, basename="user-discount-list")
+router.register("discounts", UserDiscountViewSet, basename="user-discount")
 
 profile_router = ProfileRouter()
 profile_router.register("", UserProfileViewSet, basename="user-profile")
