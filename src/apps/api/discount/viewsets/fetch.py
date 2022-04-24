@@ -23,8 +23,19 @@ class DiscountFetchViewSet(RetrieveModelMixin, viewsets.GenericViewSet):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        # TODO: check if the balance is greater then 0
-        # TODO: check if discount is enabled
+        discount = models.Discount.objects.get(pk=self.kwargs.get("pk"))
+        if not discount.enable:
+            return Response(
+                {"error": "This discount is disable, sorry."},
+                status=status.HTTP_406_NOT_ACCEPTABLE,
+            )
+
+        user_discount = models.UserDiscount.objects.filter(discount=discount).count()
+        if discount.quantity - user_discount == 0:
+            return Response(
+                {"error": "This discount is not available anymore, sorry."},
+                status=status.HTTP_406_NOT_ACCEPTABLE,
+            )
 
         models.UserDiscount.objects.create(
             discount_id=self.kwargs.get("pk"), user_id=request.user.pk

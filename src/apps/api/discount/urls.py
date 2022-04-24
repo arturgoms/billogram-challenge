@@ -5,7 +5,7 @@ from apps.api.discount.viewsets.list import DiscountListViewSet
 from apps.api.discount.viewsets.fetch import DiscountFetchViewSet
 
 router = routers.DefaultRouter()
-router.register("", DiscountListViewSet, basename="discount-list")
+router.register("", DiscountListViewSet, basename="discount")
 
 urlpatterns = [
     path(

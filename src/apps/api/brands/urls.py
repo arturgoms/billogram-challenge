@@ -5,7 +5,7 @@ from rest_framework import routers
 from apps.api.brands.viewsets.brands import BrandsListViewSet
 
 router = routers.DefaultRouter()
-router.register("", BrandsListViewSet, basename="brands-list")
+router.register("", BrandsListViewSet, basename="brands")
 
 
 urlpatterns = [

@@ -31,3 +31,6 @@ migrate:
 
 make-migrations:
 	python src/manage.py makemigrations
+
+black:
+	poetry run black .
