@@ -5,6 +5,7 @@ from apps.api import permissions
 from apps.domain import models
 from commons.api.mixins import RetrieveModelMixin
 from rest_framework.response import Response
+from apps.worker import tasks
 
 
 class DiscountFetchViewSet(RetrieveModelMixin, viewsets.GenericViewSet):
@@ -14,7 +15,6 @@ class DiscountFetchViewSet(RetrieveModelMixin, viewsets.GenericViewSet):
 
     def fetch(self, request, *args, **kwargs):
 
-        # Check if user already fetch the discount
         if models.UserDiscount.objects.filter(
             user_id=request.user.pk, discount_id=self.kwargs.get("pk")
         ).exists():
@@ -36,6 +36,14 @@ class DiscountFetchViewSet(RetrieveModelMixin, viewsets.GenericViewSet):
                 {"error": "This discount is not available anymore, sorry."},
                 status=status.HTTP_406_NOT_ACCEPTABLE,
             )
+
+        tasks.send_notification.apply_async(
+            kwargs={
+                "user": models.User.objects.get(id=request.user.pk).full_name,
+                "discount": discount.code,
+                "brand": discount.brand.name,
+            }
+        )
 
         models.UserDiscount.objects.create(
             discount_id=self.kwargs.get("pk"), user_id=request.user.pk

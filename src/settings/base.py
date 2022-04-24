@@ -21,7 +21,7 @@ from django.utils.translation import gettext_lazy as _
 # to control the entire project version.
 from rest_framework.reverse import reverse_lazy
 
-VERSION = "1.0.6"
+VERSION = "1.0.7"
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -394,8 +394,8 @@ CELERY_TASK_SOFT_TIME_LIMIT = 30
 CELERY_BROKER_URL = config("CELERY_BROKER_URL", default="redis://:@localhost:6379/0")
 
 CELERY_BEAT_SCHEDULE = {
-    "example_task": {
-        "task": "example_task",
-        "schedule": celery.schedules.crontab(minute="*"),
-    }
+    # "example_task": {
+    #     "task": "example_task",
+    #     "schedule": celery.schedules.crontab(minute="*"),
+    # }
 }
