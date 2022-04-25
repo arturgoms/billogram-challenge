@@ -38,16 +38,7 @@ class UserAdmin(PermissionsAdminMixin, SmartAdminMixin, admin.ModelAdmin):
         (_("Settings"), {"fields": ["authentication_token_field"]}),
     )
 
-    # object_tools = {
-    #     "change": [
-    #         {
-    #             "title": _("Add Discount"),
-    #             "url": lambda opts, obj: admin_url("change-payment-currency", opts=opts, args=[obj.pk]),
-    #             "permission": lambda request:
-    #             permission_helper.has_permission(request.user, 'TeacherAdmin', 'change')
-    #         }
-    #     ]
-    # }
+    readonly_fields = ["authentication_token_field"]
 
     def get_queryset(self, request):
         return super().get_queryset(request).with_name()
@@ -75,14 +66,3 @@ class UserAdmin(PermissionsAdminMixin, SmartAdminMixin, admin.ModelAdmin):
                 "help_text": mark_safe(_("Use this token to authenticate in API.")),
             },
         )
-
-    # Permissions
-
-    def has_add_permission(self, request):
-        """
-        Disable django default create view.
-        """
-        return False
-
-    def has_change_permission(self, request, obj=None):
-        return False

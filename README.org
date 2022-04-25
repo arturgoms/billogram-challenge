@@ -1,11 +1,10 @@
-#+TITLE: Django base
+#+TITLE: Billogram Challenge
 
-#+html: <p align="center"><img src="https://github.com/arturgoms/billogram-challenge/actions/workflows/build.yml/badge.svg" /><img src="https://github.com/arturgoms/billogram-challenge/actions/workflows/tests.yml/badge.svg" /><img src="https://github.com/arturgoms/billogram-challenge/actions/workflows/lint.yml/badge.svg" /><img src="https://github.com/arturgoms/billogram-challenge/actions/workflows/format.yml/badge.svg" /></p>
+#+html: <p align="center"><img src="https://github.com/arturgoms/billogram-challenge/actions/workflows/build.yml/badge.svg" /></p>
 
-* The Project
-
-This is a project that aims to create a real world production ready Django application architecture.
-
+* Discount service
+** Documentation
+The API document can be found in src/docs/api.openapi.json
 ** Features
 - Django 4 project with a really nice structure
 - Locale to translate the panel
@@ -19,25 +18,25 @@ This is a project that aims to create a real world production ready Django appli
 - Flower to see what celery is doing
 - Postgres 13 as database with pgbouncer as connection pooler
 - Poetry to manage dependencies
-- Test, Link (pylint), Formatter (black), Build pipelines
+- Test, Lint (pylint), Formatter (black), Build pipelines
 - Make file with a lot of shortcuts
 - Kubernets architecture
 ** Development
 *** Minimal environment
-1. Clone and enter the dir
+1 Clone and enter the dir
 #+BEGIN_SRC shell
 git clone git@github.com:arturgoms/billogram-challenge.git
 cd billogram-challenge
 #+END_SRC
-2. Create the environment:
+2 Create the environment:
 #+BEGIN_SRC shell
 poetry install
 #+END_SRC
-3. Enter in the shell
+3  Enter in the shell
 #+BEGIN_SRC shell
 source $(poetry env info --path)/bin/activate
 #+END_SRC
-4. I usually just run the postgres inside docker like this:
+4 I usually just run the postgres inside docker like this:
 #+BEGIN_SRC shell
 docker compose up db -d
 #+END_SRC
@@ -49,9 +48,10 @@ And then run the django project locally:
 #+BEGIN_SRC shell
 python src/manage.py runserver
 #+END_SRC
-5. Access:
+5 Access:
    admin - http:/127.0.0.1:8000/admin
    silk - http:/127.0.0.1:8000/silk
+   api - http:/127.0.0.1:8000/api
 
 *** Docker compose
 Alternatively you can run everything inside container but you ill need to build it everytime that you change something in the django app
@@ -73,12 +73,11 @@ docker compose up -d --build
 #+END_SRC
 Now you need to use the nginx port to access it:
    admin - http:/127.0.0.1:1337/admin
+   api - http:/127.0.0.1:8000/api
 And Silk will not exist anymore because you are using a 'production like' environment.
+
 ** Production
 In production you will need to apply the configs for kubernets.
 
-* TODO
-Next steps:
-
-*** TODO Create workflow for rollout the kubernets images
-*** TODO Create kubernets files for: Celery, Worker and Flower Dashboard
+** Notes
+If you want to test the endpoints you will need a valid JWT. You can enter in the admin panel, loging (login: contato@arturgomes.com.br, password: password123) and create a brand (fill the name, website and email then click save) and a user(fill the first_name, last_name, email and click save). Then you will be able to see inside the user/brand a JWT that im generating for develoment proporses. So to run the brand endpoint's just get any JWT from a brand and use it, the same is valid for the users endpoint. Also you need to be a user to execute the discount's endpoints.
