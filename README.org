@@ -49,9 +49,9 @@ And then run the django project locally:
 python src/manage.py runserver
 #+END_SRC
 5 Access:
-   admin - http:/127.0.0.1:8000/admin
-   silk - http:/127.0.0.1:8000/silk
-   api - http:/127.0.0.1:8000/api
+- admin - http:/127.0.0.1:8000/admin
+- silk - http:/127.0.0.1:8000/silk
+- api - http:/127.0.0.1:8000/api
 
 *** Docker compose
 Alternatively you can run everything inside container but you ill need to build it everytime that you change something in the django app
@@ -72,9 +72,10 @@ To rebuild:
 docker compose up -d --build
 #+END_SRC
 Now you need to use the nginx port to access it:
-   admin - http:/127.0.0.1:1337/admin
-   api - http:/127.0.0.1:8000/api
+- admin - http:/127.0.0.1:1337/admin
+- api - http:/127.0.0.1:1337/api
 And Silk will not exist anymore because you are using a 'production like' environment.
+- If you get 502 bad gateway just wait a little :)
 
 ** Production
 In production you will need to apply the configs for kubernets.
